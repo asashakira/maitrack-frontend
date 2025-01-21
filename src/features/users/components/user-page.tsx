@@ -1,35 +1,31 @@
 import {Box} from '@mui/material';
-import {useParams} from 'react-router-dom';
 
 import {User} from '@/types/api';
 
 import {useUser} from '../api/get-user';
 
-import {UserData} from './user-data';
 import {UserScores} from './user-scores';
 
-export const UserPage = () => {
-  const params = useParams();
-  const gameName = params.gameName as string;
-  const tagLine = params.tagLine as string;
-
+export const UserPage = ({maiID}: {maiID: string}) => {
   const userQuery = useUser({
-    gameName,
-    tagLine,
+    maiID,
   });
 
   if (userQuery.isLoading) {
-    return <Box>Error</Box>;
+    // TODO: loading
+    return <Box>Loading...</Box>;
   }
 
   const user: User | undefined = userQuery?.data?.data;
 
-  if (!user) return null;
+  if (!user) return <Box>User Not Found</Box>;
 
   return (
     <>
-      <UserData />
-      <UserScores />
+      <Box>{'Name: ' + user.gameName + '#' + user.tagLine}</Box>
+      <Box>{'Rating: ' + user.rating}</Box>
+      <Box>{'Play Count: ' + user.totalPlayCount}</Box>
+      <UserScores maiID={maiID} />
     </>
   );
 };

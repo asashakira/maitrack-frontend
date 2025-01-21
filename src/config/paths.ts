@@ -4,9 +4,21 @@ export const paths = {
     getHref: () => '/',
   },
 
+  auth: {
+    register: {
+      path: '/auth/register',
+      getHref: (redirectTo?: string | null | undefined) =>
+        `/auth/register${redirectTo ? `?redirectTo=${encodeURIComponent(redirectTo)}` : ''}`,
+    },
+    login: {
+      path: '/auth/login',
+      getHref: (redirectTo?: string | null | undefined) =>
+        `/auth/login${redirectTo ? `?redirectTo=${encodeURIComponent(redirectTo)}` : ''}`,
+    },
+  },
+
   users: {
-    path: 'users/:gameName/:tagLine',
-    getHref: (gameName: string, tagLine: string) =>
-      `/users/${gameName}/${tagLine}`,
+    path: 'users/:maiID',
+    getHref: (maiID: string) => `/users/${maiID}`,
   },
 } as const;

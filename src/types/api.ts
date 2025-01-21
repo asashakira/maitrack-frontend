@@ -17,6 +17,7 @@ export type User = Entity<{
 }>;
 
 export type UserScore = Entity<{
-  percentage: string;
+  scoreID: string;
+  accuracy: string;
   playedAt: string;
 }>;

@@ -1,29 +1,30 @@
 import {Box} from '@mui/material';
-import {useParams} from 'react-router-dom';
 
 import {UserScore} from '@/types/api';
 
-import {useUserScores} from '../api/get-user-records';
+import {useUserScores} from '../api/get-user-scores';
 
-export const UserScores = () => {
-  const params = useParams();
-  const gameName = params.gameName as string;
-  const tagLine = params.tagLine as string;
-
-  const userScoresQuery = useUserScores({gameName, tagLine});
+export const UserScores = ({maiID}: {maiID: string}) => {
+  const userScoresQuery = useUserScores({maiID});
 
   if (userScoresQuery.isLoading) {
-    return <Box>Error</Box>;
+    // TODO: loading
+    return <Box>Loading...</Box>;
   }
 
   const scores: UserScore[] | undefined = userScoresQuery.data?.data;
 
-  if (!scores) return null;
+  if (!scores || scores.length === 0)
+    // TODO: better error message
+    return <Box sx={{marginTop: 3}}>Scores Not Found</Box>;
 
   return (
     <>
       {scores.map((score: UserScore) => (
-        <Box key={score.id} sx={{margin: 2}}></Box>
+        <Box key={score.scoreID} sx={{marginTop: 3}}>
+          <Box>{score.accuracy}</Box>
+          <Box>{score.playedAt}</Box>
+        </Box>
       ))}
     </>
   );
