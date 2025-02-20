@@ -10,7 +10,7 @@ export const getUser = ({maiID}: {maiID: string}): Promise<{data: User}> => {
 
 export const getUserQueryOptions = (maiID: string) => {
   return queryOptions({
-    queryKey: ['user', maiID],
+    queryKey: ['users', maiID],
     queryFn: () => getUser({maiID}),
   });
 };

@@ -10,7 +10,9 @@ const UserRoute = () => {
   return (
     <Container
       sx={{
-        marginTop: 2,
+        display: 'flex',
+        flexDirection: 'column',
+        alignItems: 'center',
       }}
     >
       <UserPage maiID={maiID} />
