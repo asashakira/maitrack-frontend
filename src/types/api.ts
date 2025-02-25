@@ -3,92 +3,102 @@
 // with the backend instead of manually writing them out
 
 export type BaseEntity = {
-  createdAt: number;
-  updatedAt: number;
-};
+    createdAt: number
+    updatedAt: number
+}
 
 export type Entity<T> = {
-  [K in keyof T]: T[K];
-} & BaseEntity;
+    [K in keyof T]: T[K]
+} & BaseEntity
 
 export type User = Entity<{
-  gameName: string;
-  tagLine: string;
-  rating: string;
-  seasonPlayCount: string;
-  totalPlayCount: string;
-}>;
+    gameName: string
+    tagLine: string
+    rating: string
+    seasonPlayCount: string
+    totalPlayCount: string
+}>
+
+export type AuthUser = Entity<{
+    username: string
+    role: 'ADMIN' | 'USER'
+}>
+
+export type AuthResponse = {
+    jwt: string
+    user: AuthUser
+}
 
 export type Song = Entity<{
-  songID: string;
-  title: string;
-  artist: string;
-  genre: string;
-  bpm: string;
-  imageUrl: string;
-  isUtage: boolean;
-  isAvailable: boolean;
-  version: string;
-  releaseDate: string;
-  deleteDate: string;
-}>;
+    songID: string
+    title: string
+    artist: string
+    genre: string
+    bpm: string
+    imageUrl: string
+    isUtage: boolean
+    isAvailable: boolean
+    version: string
+    releaseDate: string
+    deleteDate: string
+}>
 
 export type Beatmap = Entity<{
-  beatmapID: string;
-  difficulty: string;
-  level: string;
-  internalLevel: number | null;
-  type: string;
-  totalNotes: number;
-  tap: number;
-  hold: number;
-  slide: number;
-  touch: number;
-  break: number;
-  noteDesigner: string;
-  maxDxScore: number;
+    beatmapID: string
+    difficulty: string
+    level: string
+    internalLevel: number | null
+    type: string
+    totalNotes: number
+    tap: number
+    hold: number
+    slide: number
+    touch: number
+    break: number
+    noteDesigner: string
+    maxDxScore: number
 }> &
-  Song;
+    Song
 
 export type ScoresResponse = {
-  scores: Score[];
-  nextOffset: number;
-  hasMore: boolean;
-};
+    scores: Score[]
+    nextOffset: number
+    hasMore: boolean
+}
 
 export type Score = Entity<{
-  scoreID: string;
-  userID: string;
-  accuracy: string;
-  maxCombo: number;
-  dxScore: number;
-  tapCritical: number;
-  tapPerfect: number;
-  tapGreat: number;
-  tapGood: number;
-  tapMiss: number;
-  holdCritical: number;
-  holdPerfect: number;
-  holdGreat: number;
-  holdGood: number;
-  holdMiss: number;
-  slideCritical: number;
-  slidePerfect: number;
-  slideGreat: number;
-  slideGood: number;
-  slideMiss: number;
-  touchCritical: number;
-  touchPerfect: number;
-  touchGreat: number;
-  touchGood: number;
-  touchMiss: number;
-  breakCritical: number;
-  breakPerfect: number;
-  breakGreat: number;
-  breakGood: number;
-  breakMiss: number;
-  fast: number;
-  late: number;
-  playedAt: string;
+    scoreID: string
+    userID: string
+    accuracy: string
+    maxCombo: number
+    dxScore: number
+    tapCritical: number
+    tapPerfect: number
+    tapGreat: number
+    tapGood: number
+    tapMiss: number
+    holdCritical: number
+    holdPerfect: number
+    holdGreat: number
+    holdGood: number
+    holdMiss: number
+    slideCritical: number
+    slidePerfect: number
+    slideGreat: number
+    slideGood: number
+    slideMiss: number
+    touchCritical: number
+    touchPerfect: number
+    touchGreat: number
+    touchGood: number
+    touchMiss: number
+    breakCritical: number
+    breakPerfect: number
+    breakGreat: number
+    breakGood: number
+    breakMiss: number
+    fast: number
+    late: number
+    playedAt: string
 }> &
-  Beatmap;
+    Beatmap
