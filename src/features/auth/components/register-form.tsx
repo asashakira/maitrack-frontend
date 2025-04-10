@@ -77,7 +77,7 @@ export const RegisterForm = () => {
                 <Box sx={{display: 'flex'}}>
                     <TextField
                         label="Game Name"
-                        name="gamename"
+                        name="gameName"
                         value={formData.gameName}
                         onChange={handleChange}
                         variant="outlined"
@@ -88,7 +88,7 @@ export const RegisterForm = () => {
 
                     <TextField
                         label="Tag Line"
-                        name="tagline"
+                        name="tagLine"
                         value={formData.tagLine}
                         onChange={handleChange}
                         variant="outlined"
