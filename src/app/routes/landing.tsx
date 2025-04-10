@@ -42,7 +42,7 @@ const LandingRoute = () => {
                         textDecoration: 'none',
                     }}
                 >
-                    MAI.GG
+                    MAITRACK
                 </Typography>
             </Box>
             <Box component="form" onSubmit={handleSubmit} sx={{width: 800}}>

@@ -12,6 +12,7 @@ export type Entity<T> = {
 } & BaseEntity
 
 export type User = Entity<{
+    userID: string
     gameName: string
     tagLine: string
     rating: string

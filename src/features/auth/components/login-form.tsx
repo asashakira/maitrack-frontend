@@ -1,6 +1,8 @@
 import {Box, Button, Container, TextField, Typography} from '@mui/material'
 import * as React from 'react'
+import {Link} from 'react-router-dom'
 
+import {paths} from '@/config/paths'
 import {LoginInput, useLogin} from '@/lib/auth'
 
 type LoginFormProps = {
@@ -76,6 +78,9 @@ export const LoginForm = ({onSuccess}: LoginFormProps) => {
                 >
                     Submit
                 </Button>
+                <Box sx={{display: 'flex', justifyContent: 'flex-end'}}>
+                    <Link to={paths.auth.register.getHref()}>Register</Link>
+                </Box>
             </Box>
         </Container>
     )

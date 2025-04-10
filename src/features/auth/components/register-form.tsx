@@ -7,7 +7,9 @@ import {
     Typography,
 } from '@mui/material'
 import * as React from 'react'
+import {Link} from 'react-router-dom'
 
+import {paths} from '@/config/paths'
 import {RegisterInput, useLogout} from '@/lib/auth'
 
 export const RegisterForm = () => {
@@ -53,7 +55,6 @@ export const RegisterForm = () => {
                 <Typography variant="h5" align="center" gutterBottom>
                     User Registration
                 </Typography>
-
                 <TextField
                     label="Username"
                     name="username"
@@ -63,7 +64,6 @@ export const RegisterForm = () => {
                     fullWidth
                     required
                 />
-
                 <TextField
                     label="Password"
                     name="password"
@@ -74,7 +74,6 @@ export const RegisterForm = () => {
                     fullWidth
                     required
                 />
-
                 <Box sx={{display: 'flex'}}>
                     <TextField
                         label="Game Name"
@@ -106,7 +105,6 @@ export const RegisterForm = () => {
                         }}
                     />
                 </Box>
-
                 <TextField
                     label="Sega ID"
                     name="segaID"
@@ -116,7 +114,6 @@ export const RegisterForm = () => {
                     fullWidth
                     required
                 />
-
                 <TextField
                     label="Sega Password"
                     name="segaPassword"
@@ -127,7 +124,6 @@ export const RegisterForm = () => {
                     fullWidth
                     required
                 />
-
                 <Button
                     type="submit"
                     variant="contained"
@@ -136,6 +132,9 @@ export const RegisterForm = () => {
                 >
                     Submit
                 </Button>
+                <Box sx={{display: 'flex', justifyContent: 'flex-end'}}>
+                    <Link to={paths.auth.login.getHref()}>Login</Link>
+                </Box>
             </Box>
         </Container>
     )

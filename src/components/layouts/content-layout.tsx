@@ -50,6 +50,10 @@ const Header = () => {
     const handleCloseUserMenu = () => {
         setAnchorElUser(null)
     }
+    const handleRegisterClick = () => {
+        setAnchorElUser(null)
+        navigate(`/auth/register`)
+    }
     const handleSignInClick = () => {
         setAnchorElUser(null)
         navigate(`/auth/login`)
@@ -79,7 +83,7 @@ const Header = () => {
                             textDecoration: 'none',
                         }}
                     >
-                        MAI.GG
+                        MaiTrack
                     </Typography>
                 </Box>
                 <Box>
@@ -114,9 +118,14 @@ const Header = () => {
                                 </MenuItem>
                             </>
                         ) : (
-                            <MenuItem onClick={handleSignInClick}>
-                                Sign In
-                            </MenuItem>
+                            <>
+                                <MenuItem onClick={handleSignInClick}>
+                                    Sign In
+                                </MenuItem>
+                                <MenuItem onClick={handleRegisterClick}>
+                                    Register
+                                </MenuItem>
+                            </>
                         )}
                     </Menu>
                 </Box>
