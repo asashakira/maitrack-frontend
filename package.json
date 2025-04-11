@@ -18,7 +18,7 @@
         "@mui/icons-material": "^6.2.1",
         "@mui/material": "^6.2.1",
         "@ngneat/falso": "^7.2.0",
-        "axios": "^1.7.9",
+        "axios": "^1.8.2",
         "class-variance-authority": "^0.7.0",
         "eslint-plugin-check-file": "^2.8.0",
         "lucide-react": "^0.378.0",
