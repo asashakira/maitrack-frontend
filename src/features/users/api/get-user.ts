@@ -1,35 +1,28 @@
-import {useQuery, queryOptions} from '@tanstack/react-query';
+import {useQuery, queryOptions} from '@tanstack/react-query'
 
-import {api} from '@/lib/api-client';
-import {QueryConfig} from '@/lib/react-query';
-import {User} from '@/types/api';
+import {api} from '@/lib/api-client'
+import {QueryConfig} from '@/lib/react-query'
+import {User} from '@/types/api'
 
-export const getUser = ({
-  gameName,
-  tagLine,
-}: {
-  gameName: string;
-  tagLine: string;
-}): Promise<{data: User}> => {
-  return api.get(`/users/by-mai-id/${gameName}/${tagLine}/data`);
-};
+export const getUser = ({maiID}: {maiID: string}): Promise<{data: User}> => {
+    return api.get(`/users/by-mai-id/${maiID}`)
+}
 
-export const getUserQueryOptions = (gameName: string, tagLine: string) => {
-  return queryOptions({
-    queryKey: ['user', gameName],
-    queryFn: () => getUser({gameName, tagLine}),
-  });
-};
+export const getUserQueryOptions = (maiID: string) => {
+    return queryOptions({
+        queryKey: ['users', maiID],
+        queryFn: () => getUser({maiID}),
+    })
+}
 
 type UseUserOptions = {
-  gameName: string;
-  tagLine: string;
-  queryConfig?: QueryConfig<typeof getUserQueryOptions>;
-};
+    maiID: string
+    queryConfig?: QueryConfig<typeof getUserQueryOptions>
+}
 
-export const useUser = ({gameName, tagLine, queryConfig}: UseUserOptions) => {
-  return useQuery({
-    ...getUserQueryOptions(gameName, tagLine),
-    ...queryConfig,
-  });
-};
+export const useUser = ({maiID, queryConfig}: UseUserOptions) => {
+    return useQuery({
+        ...getUserQueryOptions(maiID),
+        ...queryConfig,
+    })
+}

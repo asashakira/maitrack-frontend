@@ -1,12 +1,29 @@
 export const paths = {
-  home: {
-    path: '/',
-    getHref: () => '/',
-  },
+    home: {
+        path: '/',
+        getHref: () => '/',
+    },
 
-  users: {
-    path: 'users/:gameName/:tagLine',
-    getHref: (gameName: string, tagLine: string) =>
-      `/users/${gameName}/${tagLine}`,
-  },
-} as const;
+    auth: {
+        register: {
+            path: '/auth/register',
+            getHref: (redirectTo?: string | null | undefined) =>
+                `/auth/register${redirectTo ? `?redirectTo=${encodeURIComponent(redirectTo)}` : ''}`,
+        },
+        login: {
+            path: '/auth/login',
+            getHref: (redirectTo?: string | null | undefined) =>
+                `/auth/login${redirectTo ? `?redirectTo=${encodeURIComponent(redirectTo)}` : ''}`,
+        },
+    },
+
+    users: {
+        path: 'users/:maiID',
+        getHref: (maiID: string) => `/users/${maiID}`,
+    },
+
+    profile: {
+        path: 'profile',
+        getHref: () => '/profile',
+    },
+} as const
