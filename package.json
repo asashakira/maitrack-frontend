@@ -6,10 +6,10 @@
     "type": "module",
     "scripts": {
         "dev": "vite",
-        "build": "tsc -b && vite build",
-        "lint": "eslint 'src/**/*.{js,ts,tsx}' --fix",
-        "format": "prettier --write 'src/**/*.{js,ts,tsx,json,md}'",
-        "preview": "vite preview"
+        "build": "tsc && vite build --base=/",
+        "preview": "vite preview",
+        "lint": "eslint src --ignore-path .gitignore",
+        "format": "prettier --write 'src/**/*.{js,ts,tsx,json,md}'"
     },
     "dependencies": {
         "@hookform/resolvers": "^3.3.4",
