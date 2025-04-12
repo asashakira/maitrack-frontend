@@ -1,87 +1,76 @@
-import {Box, Button, Container, TextField, Typography} from '@mui/material'
-import * as React from 'react'
+import {FieldError, useForm} from 'react-hook-form'
 import {Link} from 'react-router-dom'
 
+import {Button} from '@/components/ui/button'
+import {Input} from '@/components/ui/form'
 import {paths} from '@/config/paths'
-import {LoginInput, useLogin} from '@/lib/auth'
+import {useLogin} from '@/lib/auth'
 
 type LoginFormProps = {
     onSuccess: () => void
 }
 
 export const LoginForm = ({onSuccess}: LoginFormProps) => {
+    const {
+        register,
+        handleSubmit,
+        formState: {errors},
+    } = useForm()
     const login = useLogin({onSuccess})
-    const [formData, setFormData] = React.useState<LoginInput>({
-        username: '',
-        password: '',
-    })
-
-    const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-        const {name, value} = e.target
-        setFormData(prev => ({
-            ...prev,
-            [name]: value,
-        }))
-    }
-
-    const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
-        e.preventDefault()
-        login.mutate(formData)
-    }
 
     return (
-        <Container maxWidth="sm">
-            <Box
-                component="form"
-                onSubmit={handleSubmit}
-                sx={{
-                    display: 'flex',
-                    flexDirection: 'column',
-                    gap: 2,
-                    mt: 4,
-                    p: 3,
-                    border: '1px solid #ccc',
-                    borderRadius: 2,
-                    boxShadow: 1,
-                }}
+        <div className="w-full px-3 py-10">
+            <form
+                onSubmit={handleSubmit(data => {
+                    login.mutate({
+                        username: data.username,
+                        password: data.password,
+                    })
+                })}
+                className="border border-gray-300 rounded-sm shadow p-6 flex flex-col gap-4 max-w-md m-auto"
             >
-                <Typography variant="h5" align="center" gutterBottom>
-                    User Login
-                </Typography>
+                <h1 className="text-xl font-bold mb-2">Log in</h1>
 
-                <TextField
+                <Input
+                    type="text"
                     label="Username"
-                    name="username"
-                    value={formData.username}
-                    onChange={handleChange}
-                    variant="outlined"
-                    fullWidth
-                    required
+                    placeholder="Username"
+                    error={errors.username as FieldError | undefined}
+                    registration={register('username', {
+                        required: 'Username is required',
+                    })}
                 />
-
-                <TextField
-                    label="Password"
-                    name="password"
+                <Input
                     type="password"
-                    value={formData.password}
-                    onChange={handleChange}
-                    variant="outlined"
-                    fullWidth
-                    required
+                    label="Password"
+                    placeholder="Password"
+                    error={errors.password as FieldError | undefined}
+                    registration={register('password', {
+                        required: 'Password is required',
+                    })}
                 />
 
                 <Button
                     type="submit"
                     variant="contained"
-                    color="primary"
-                    fullWidth
+                    size="small"
+                    disabled={login.isPending}
                 >
-                    Submit
+                    Log in
                 </Button>
-                <Box sx={{display: 'flex', justifyContent: 'flex-end'}}>
-                    <Link to={paths.auth.register.getHref()}>Register</Link>
-                </Box>
-            </Box>
-        </Container>
+
+                <div className="flex justify-between text-sm">
+                    <div className="text-red-500">
+                        {login.isError ? 'Login Failed' : ''}
+                    </div>
+                    <Link
+                        to={paths.auth.register.getHref()}
+                        className="text-lime-600 hover:underline"
+                    >
+                        Register
+                    </Link>
+                </div>
+            </form>
+        </div>
     )
 }

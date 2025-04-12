@@ -1,6 +1,6 @@
-import {Box} from '@mui/material'
 import {useNavigate, useSearchParams} from 'react-router-dom'
 
+import {AuthLayout} from '@/components/layouts'
 import {paths} from '@/config/paths'
 import {LoginForm} from '@/features/auth/components/login-form'
 
@@ -9,8 +9,7 @@ const LoginRoute = () => {
     const [searchParams] = useSearchParams()
     const redirectTo = searchParams.get('redirectTo')
     return (
-        // TODO: make AuthLayout
-        <Box>
+        <AuthLayout>
             <LoginForm
                 onSuccess={() => {
                     navigate(
@@ -21,7 +20,7 @@ const LoginRoute = () => {
                     )
                 }}
             />
-        </Box>
+        </AuthLayout>
     )
 }
 
