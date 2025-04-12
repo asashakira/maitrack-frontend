@@ -1,141 +1,126 @@
-import {
-    Box,
-    Button,
-    Container,
-    InputAdornment,
-    TextField,
-    Typography,
-} from '@mui/material'
-import * as React from 'react'
+import {FieldError, useForm} from 'react-hook-form'
 import {Link} from 'react-router-dom'
 
+import {Button} from '@/components/ui/button'
+import {Input} from '@/components/ui/form'
 import {paths} from '@/config/paths'
-import {RegisterInput, useLogout} from '@/lib/auth'
+import {useRegister} from '@/lib/auth'
 
-export const RegisterForm = () => {
-    const logout = useLogout()
-    const [formData, setFormData] = React.useState<RegisterInput>({
-        username: '',
-        password: '',
-        gameName: '',
-        tagLine: '',
-        segaID: '',
-        segaPassword: '',
-    })
+type RegisterFormProps = {
+    onSuccess: () => void
+}
 
-    const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-        const {name, value} = e.target
-        setFormData(prev => ({
-            ...prev,
-            [name]: value,
-        }))
-    }
-
-    const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
-        e.preventDefault()
-        logout.mutate(formData)
-    }
+export const RegisterForm = ({onSuccess}: RegisterFormProps) => {
+    const {
+        register,
+        handleSubmit,
+        formState: {errors},
+    } = useForm()
+    const registering = useRegister({onSuccess})
 
     return (
-        <Container maxWidth="sm">
-            <Box
-                component="form"
-                onSubmit={handleSubmit}
-                sx={{
-                    display: 'flex',
-                    flexDirection: 'column',
-                    gap: 2,
-                    mt: 4,
-                    p: 3,
-                    border: '1px solid #ccc',
-                    borderRadius: 2,
-                    boxShadow: 1,
-                }}
+        <div className="w-full px-3 py-10">
+            <form
+                onSubmit={handleSubmit(data => {
+                    registering.mutate({
+                        username: data.username,
+                        password: data.password,
+                        segaID: data.segaID,
+                        segaPassword: data.segaPassword,
+                        gameName: data.gameName,
+                        tagLine: data.tagLine,
+                    })
+                })}
+                className="border border-gray-300 rounded-sm shadow p-6 flex flex-col gap-4 max-w-md m-auto"
             >
-                <Typography variant="h5" align="center" gutterBottom>
-                    User Registration
-                </Typography>
-                <TextField
-                    label="Username"
-                    name="username"
-                    value={formData.username}
-                    onChange={handleChange}
-                    variant="outlined"
-                    fullWidth
-                    required
-                />
-                <TextField
-                    label="Password"
-                    name="password"
-                    type="password"
-                    value={formData.password}
-                    onChange={handleChange}
-                    variant="outlined"
-                    fullWidth
-                    required
-                />
-                <Box sx={{display: 'flex'}}>
-                    <TextField
-                        label="Game Name"
-                        name="gameName"
-                        value={formData.gameName}
-                        onChange={handleChange}
-                        variant="outlined"
-                        required
-                        fullWidth
-                        sx={{marginRight: 2}}
-                    />
+                <h1 className="text-xl font-bold mb-2">Register</h1>
 
-                    <TextField
-                        label="Tag Line"
-                        name="tagLine"
-                        value={formData.tagLine}
-                        onChange={handleChange}
-                        variant="outlined"
-                        required
-                        fullWidth
-                        slotProps={{
-                            input: {
-                                startAdornment: (
-                                    <InputAdornment position="start">
-                                        #
-                                    </InputAdornment>
-                                ),
-                            },
-                        }}
-                    />
-                </Box>
-                <TextField
-                    label="Sega ID"
-                    name="segaID"
-                    value={formData.segaID}
-                    onChange={handleChange}
-                    variant="outlined"
-                    fullWidth
-                    required
+                <Input
+                    type="text"
+                    label="Username"
+                    placeholder="Username"
+                    error={errors.username as FieldError | undefined}
+                    registration={register('username', {
+                        required: 'Username is required',
+                    })}
                 />
-                <TextField
-                    label="Sega Password"
-                    name="segaPassword"
+                <Input
                     type="password"
-                    value={formData.segaPassword}
-                    onChange={handleChange}
-                    variant="outlined"
-                    fullWidth
-                    required
+                    label="Password"
+                    placeholder="Password"
+                    error={errors.password as FieldError | undefined}
+                    registration={register('password', {
+                        required: 'Password is required',
+                    })}
                 />
+                <Input
+                    type="text"
+                    label="SEGA ID"
+                    placeholder="SEGA ID"
+                    error={errors.segaID as FieldError | undefined}
+                    registration={register('segaID', {
+                        required: 'SEGA ID is required',
+                    })}
+                />
+                <Input
+                    type="password"
+                    label="SEGA Password"
+                    placeholder="SEGA Password"
+                    error={errors.segaPassword as FieldError | undefined}
+                    registration={register('segaPassword', {
+                        required: 'SEGA Password is required',
+                    })}
+                />
+                <div className="flex gap-4">
+                    <div className="flex-1">
+                        <Input
+                            type="text"
+                            label="Game Name"
+                            placeholder="Game Name"
+                            error={errors.gameName as FieldError | undefined}
+                            registration={register('gameName', {
+                                required: 'Game Name is required',
+                            })}
+                        />
+                    </div>
+                    <div className="relative flex-1">
+                        <span className="absolute left-3 top-[29px] text-gray-400 text-sm">
+                            #
+                        </span>
+                        <Input
+                            type="text"
+                            label="Tag Line"
+                            placeholder="Tag Line"
+                            error={errors.tagLine as FieldError | undefined}
+                            registration={register('tagLine', {
+                                required: 'Tag Line is required',
+                            })}
+                            className="pl-6"
+                        />
+                    </div>
+                </div>
+
                 <Button
                     type="submit"
                     variant="contained"
-                    color="primary"
-                    fullWidth
+                    size="small"
+                    isLoading={registering.isPending}
                 >
-                    Submit
+                    Register
                 </Button>
-                <Box sx={{display: 'flex', justifyContent: 'flex-end'}}>
-                    <Link to={paths.auth.login.getHref()}>Login</Link>
-                </Box>
-            </Box>
-        </Container>
+
+                <div className="flex justify-between text-sm">
+                    <div className="text-red-500">
+                        {registering.isError ? 'Register Failed' : ''}
+                    </div>
+                    <Link
+                        to={paths.auth.login.getHref()}
+                        className="text-lime-600 hover:underline"
+                    >
+                        Log in
+                    </Link>
+                </div>
+            </form>
+        </div>
     )
 }

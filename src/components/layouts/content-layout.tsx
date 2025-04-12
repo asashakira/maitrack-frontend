@@ -1,17 +1,7 @@
-import {AccountCircle} from '@mui/icons-material'
-import {
-    AppBar,
-    Box,
-    Container,
-    IconButton,
-    Menu,
-    MenuItem,
-    Toolbar,
-    Typography,
-} from '@mui/material'
 import * as React from 'react'
 import {useNavigate} from 'react-router-dom'
 
+import {Button} from '@/components/ui/button'
 import {useLogout, useUser} from '@/lib/auth'
 
 type ContentLayoutProps = {
@@ -23,15 +13,7 @@ export const ContentLayout = ({children}: ContentLayoutProps) => {
     return (
         <>
             <Header />
-            <Container
-                sx={{
-                    display: 'flex',
-                    flexDirection: 'column',
-                    alignItems: 'center',
-                }}
-            >
-                {children}
-            </Container>
+            <div className="flex flex-col items-center">{children}</div>
         </>
     )
 }
@@ -54,11 +36,11 @@ const Header = () => {
         setAnchorElUser(null)
         navigate(`/auth/register`)
     }
-    const handleSignInClick = () => {
+    const handleLogInClick = () => {
         setAnchorElUser(null)
         navigate(`/auth/login`)
     }
-    const handleSignOutClick = () => {
+    const handleLogOutClick = () => {
         setAnchorElUser(null)
         logout.mutate({})
     }
@@ -68,68 +50,37 @@ const Header = () => {
     }
 
     return (
-        <AppBar position="static" sx={{alignItems: 'center'}}>
-            <Toolbar disableGutters sx={{width: 900}}>
-                <Box sx={{flex: 1}}>
-                    <Typography
-                        variant="h6"
-                        component="a"
-                        noWrap
+        <header className="bg-slate-800 text-white flex">
+            <div className="w-full max-w-[1200px] flex items-center px-4 py-4">
+                <div className="flex-1">
+                    <a
                         href="/"
-                        sx={{
-                            fontWeight: 700,
-                            letterSpacing: '.2rem',
-                            color: 'inherit',
-                            textDecoration: 'none',
-                        }}
+                        className="text-xl font-bold tracking-widest text-white no-underline"
                     >
                         MaiTrack
-                    </Typography>
-                </Box>
-                <Box>
-                    <IconButton
-                        size="large"
-                        aria-label="account of current user"
-                        aria-controls="menu-appbar"
-                        aria-haspopup="true"
-                        color="inherit"
-                        disableRipple
-                        onClick={handleOpenUserMenu}
-                    >
-                        <AccountCircle />
-                    </IconButton>
-                    <Menu
-                        sx={{mt: 4.5}}
-                        id="menu-appbar"
-                        anchorEl={anchorElUser}
-                        anchorOrigin={{vertical: 'top', horizontal: 'right'}}
-                        keepMounted
-                        transformOrigin={{vertical: 'top', horizontal: 'right'}}
-                        open={Boolean(anchorElUser)}
-                        onClose={handleCloseUserMenu}
-                    >
-                        {user?.data ? (
-                            <>
-                                <MenuItem onClick={handleProfileClick}>
-                                    Profile
-                                </MenuItem>
-                                <MenuItem onClick={handleSignOutClick}>
-                                    Sign Out
-                                </MenuItem>
-                            </>
-                        ) : (
-                            <>
-                                <MenuItem onClick={handleSignInClick}>
-                                    Sign In
-                                </MenuItem>
-                                <MenuItem onClick={handleRegisterClick}>
-                                    Register
-                                </MenuItem>
-                            </>
-                        )}
-                    </Menu>
-                </Box>
-            </Toolbar>
-        </AppBar>
+                    </a>
+                </div>
+                <div>
+                    {user?.data ? (
+                        <Button variant="contained" onClick={handleLogOutClick}>Log Out</Button>
+                    ) : (
+                        <div className="flex gap-4">
+                            <Button
+                                variant="outlined"
+                                onClick={handleLogInClick}
+                            >
+                                Log In
+                            </Button>
+                            <Button
+                                variant="contained"
+                                onClick={handleRegisterClick}
+                            >
+                                Register
+                            </Button>
+                        </div>
+                    )}
+                </div>
+            </div>
+        </header>
     )
 }
