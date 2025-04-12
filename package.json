@@ -12,11 +12,7 @@
         "preview": "vite preview"
     },
     "dependencies": {
-        "@emotion/react": "^11.14.0",
-        "@emotion/styled": "^11.14.0",
         "@hookform/resolvers": "^3.3.4",
-        "@mui/icons-material": "^6.2.1",
-        "@mui/material": "^6.2.1",
         "@ngneat/falso": "^7.2.0",
         "axios": "^1.8.2",
         "class-variance-authority": "^0.7.0",
