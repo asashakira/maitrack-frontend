@@ -4,7 +4,8 @@ import {useNavigate, useSearchParams} from 'react-router-dom'
 import {paths} from '@/config/paths'
 import {useUser} from '@/lib/auth'
 
-import {ContentLayout} from './content-layout'
+import {Footer} from './footer'
+import {Header} from './header'
 
 type AuthLayoutProps = {
     children: React.ReactNode
@@ -26,5 +27,13 @@ export const AuthLayout = ({children}: AuthLayoutProps) => {
         }
     }, [user.data, navigate, redirectTo])
 
-    return <ContentLayout>{children}</ContentLayout>
+    return (
+        <div className="flex flex-col bg-neutral-100 min-h-screen">
+            <Header />
+            <div className="flex flex-col items-center flex-grow">
+                {children}
+            </div>
+            <Footer />
+        </div>
+    )
 }
