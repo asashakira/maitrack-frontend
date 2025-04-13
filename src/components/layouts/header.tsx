@@ -36,7 +36,7 @@ export const Header = () => {
     }
 
     return (
-        <header className="bg-slate-800 text-white flex">
+        <header className="bg-slate-800 text-white flex justify-center">
             <div className="w-full max-w-[1200px] flex items-center px-4 py-4">
                 <div className="flex-1">
                     <a
@@ -48,7 +48,9 @@ export const Header = () => {
                 </div>
                 <div>
                     {user?.data ? (
-                        <Button variant="contained" onClick={handleLogOutClick}>Log Out</Button>
+                        <Button variant="contained" onClick={handleLogOutClick}>
+                            Log Out
+                        </Button>
                     ) : (
                         <div className="flex gap-4">
                             <Button
