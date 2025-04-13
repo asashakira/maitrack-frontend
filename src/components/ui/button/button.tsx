@@ -1,6 +1,6 @@
 type ButtonProps = React.ButtonHTMLAttributes<HTMLButtonElement> & {
     children: React.ReactNode
-    variant: 'contained' | 'outlined'
+    variant?: 'contained' | 'outlined'
     size?: 'small' | 'medium' | 'large'
     isLoading?: boolean
     className?: string
@@ -8,7 +8,7 @@ type ButtonProps = React.ButtonHTMLAttributes<HTMLButtonElement> & {
 
 export const Button = ({
     children,
-    variant,
+    variant = 'contained',
     size = 'medium',
     isLoading = false,
     className,
@@ -32,7 +32,7 @@ export const Button = ({
 
     const finalStyle = [
         baseStyle,
-        isLoading ? loadingStyle : variantStyles[variant ?? 'contained'],
+        isLoading ? loadingStyle : variantStyles[variant],
         sizeStyles[size],
         'transition duration-200 ease-in-out',
         className,
