@@ -3,6 +3,7 @@ type ButtonProps = React.ButtonHTMLAttributes<HTMLButtonElement> & {
     variant?: 'contained' | 'outlined'
     size?: 'small' | 'medium' | 'large'
     isLoading?: boolean
+    disabled?: boolean
     className?: string
 }
 
@@ -11,11 +12,13 @@ export const Button = ({
     variant = 'contained',
     size = 'medium',
     isLoading = false,
+    disabled = false,
     className,
     ...rest
 }: ButtonProps) => {
-    const baseStyle =
-        'border-1 border-lime-400 rounded py-2 px-4 cursor-pointer'
+    const buttonDisabled = isLoading || disabled
+
+    const baseStyle = 'border-1 border-lime-400 rounded py-2 px-4'
 
     const variantStyles = {
         contained: 'bg-lime-400 text-black hover:bg-lime-800 hover:text-white',
@@ -28,11 +31,14 @@ export const Button = ({
         large: 'text-lg',
     }
 
-    const loadingStyle = 'bg-gray-400 cursor-not-allowed'
+    const disabledStyle = 'bg-gray-400 cursor-default'
+
+    const cursorStyle = buttonDisabled ? 'cursor-default' : 'cursor-pointer'
 
     const finalStyle = [
         baseStyle,
-        isLoading ? loadingStyle : variantStyles[variant],
+        cursorStyle,
+        buttonDisabled ? disabledStyle : variantStyles[variant],
         sizeStyles[size],
         'transition duration-200 ease-in-out',
         className,
@@ -41,8 +47,8 @@ export const Button = ({
         .join(' ')
 
     return (
-        <button disabled={isLoading} className={finalStyle} {...rest}>
-            {isLoading ? 'Loading...' : children}
+        <button disabled={buttonDisabled} className={finalStyle} {...rest}>
+            {isLoading ? 'Loading' : children}
         </button>
     )
 }

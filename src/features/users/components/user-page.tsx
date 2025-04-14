@@ -40,8 +40,16 @@ export const UserPage = ({maiID}: {maiID: string}) => {
 
     if (!user) return <div>User Not Found</div>
 
+    // Update Button
+    const lastScrapedAt = new Date(user.lastScrapedAt).getTime()
+    const now = new Date().getTime()
+    const updateCD = 5 * 1000 * 60 // 5 minutes
+    const updateAvailableAt = lastScrapedAt + updateCD
+    const disableUpdateButton =
+        now < updateAvailableAt || updateUserMutation.isPending
+
     const handleUpdateButton = () => {
-        updateUserMutation.mutate({userID: user.userID})
+        updateUserMutation.mutate({maiID})
     }
 
     return (
@@ -64,7 +72,8 @@ export const UserPage = ({maiID}: {maiID: string}) => {
                         <Button
                             size="small"
                             onClick={handleUpdateButton}
-                            disabled={updateUserMutation.isPending}
+                            isLoading={updateUserMutation.isPending}
+                            disabled={disableUpdateButton}
                         >
                             Update
                         </Button>
@@ -106,6 +115,12 @@ export const UserPage = ({maiID}: {maiID: string}) => {
                     Recent
                 </span>
             </div>
+
+            {/* TODO: loading circle */}
+            {updateUserMutation.isPending ?? (
+                <div className="my-2">Loading...</div>
+            )}
+
             {scoresQuery.data?.pages.map(page =>
                 page.data.scores?.map((score: Score) => (
                     <ScoreCard key={score.scoreID} score={score} />

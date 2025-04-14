@@ -18,6 +18,7 @@ export type User = Entity<{
     rating: string
     seasonPlayCount: string
     totalPlayCount: string
+    lastScrapedAt: string
 }>
 
 export type AuthUser = Entity<{
