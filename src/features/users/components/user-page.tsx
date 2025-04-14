@@ -107,7 +107,7 @@ export const UserPage = ({maiID}: {maiID: string}) => {
                 </span>
             </div>
             {scoresQuery.data?.pages.map(page =>
-                page.data.scores.map((score: Score) => (
+                page.data.scores?.map((score: Score) => (
                     <ScoreCard key={score.scoreID} score={score} />
                 )),
             )}
