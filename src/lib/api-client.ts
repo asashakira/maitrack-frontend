@@ -10,7 +10,7 @@ function authRequestInterceptor(config: InternalAxiosRequestConfig) {
 }
 
 export const api = Axios.create({
-    baseURL: 'http://localhost:8080/v1/',
+    baseURL: 'https://maitrack.asashakira.dev/api/v1/',
 })
 
 api.interceptors.request.use(authRequestInterceptor)
