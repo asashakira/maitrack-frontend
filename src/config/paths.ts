@@ -26,4 +26,9 @@ export const paths = {
         path: 'profile',
         getHref: () => '/profile',
     },
+
+    songs: {
+        path: 'songs',
+        getHref: () => '/songs',
+    },
 } as const
