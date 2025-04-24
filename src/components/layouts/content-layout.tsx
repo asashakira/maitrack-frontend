@@ -9,6 +9,8 @@ type ContentLayoutProps = {
 }
 
 export const ContentLayout = ({children}: ContentLayoutProps) => {
+    document.body.classList.add('bg-gray-900', 'text-white')
+
     return (
         <div className="flex flex-col min-h-screen bg-gray-900 text-white">
             <Header />

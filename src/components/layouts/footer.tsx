@@ -14,7 +14,7 @@ export const Footer = () => {
                         </a>
                     </div>
                     <div className="text-xs text-zinc-400">
-                        MyTrack &copy; {new Date().getFullYear()}
+                        maitrack &copy; {new Date().getFullYear()}
                     </div>
                 </div>
             </div>
