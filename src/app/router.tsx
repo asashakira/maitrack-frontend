@@ -7,7 +7,7 @@ import LoginRoute from './routes/auth/login'
 import RegisterRoute from './routes/auth/register'
 import LandingRoute from './routes/landing'
 import NotFoundRoute from './routes/not-found'
-import ProfileRoute from './routes/profile'
+import SettingsRoute from './routes/settings'
 import SongsRoute from './routes/songs'
 import UserRoute from './routes/users'
 
@@ -24,10 +24,10 @@ export const AppRouter = () => {
                 <Route path={paths.users.path} element={<UserRoute />} />
                 <Route path={paths.songs.path} element={<SongsRoute />} />
                 <Route
-                    path={paths.profile.path}
+                    path={paths.settings.path}
                     element={
                         <ProtectedRoute>
-                            <ProfileRoute />
+                            <SettingsRoute />
                         </ProtectedRoute>
                     }
                 />

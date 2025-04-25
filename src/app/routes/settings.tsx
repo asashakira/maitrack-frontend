@@ -1,16 +1,16 @@
 import {ContentLayout} from '@/components/layouts'
 import {useUser} from '@/lib/auth'
 
-const ProfileRoute = () => {
+const SettingsRoute = () => {
     const user = useUser()
 
     if (!user.data) return null
 
     return (
-        <ContentLayout title="Profile">
-            <div>User Profile</div>
+        <ContentLayout title="Settings">
+            <div>{user.data.username}</div>
         </ContentLayout>
     )
 }
 
-export default ProfileRoute
+export default SettingsRoute

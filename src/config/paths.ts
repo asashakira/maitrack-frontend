@@ -22,9 +22,9 @@ export const paths = {
         getHref: (maiID: string) => `/users/${maiID}`,
     },
 
-    profile: {
-        path: 'profile',
-        getHref: () => '/profile',
+    settings: {
+        path: 'settings',
+        getHref: () => '/settings',
     },
 
     songs: {
