@@ -1,10 +1,14 @@
-import {faSearch} from '@fortawesome/free-solid-svg-icons'
+import {
+    faSearch,
+    faAngleDown,
+    faAngleUp,
+} from '@fortawesome/free-solid-svg-icons'
 import {FontAwesomeIcon} from '@fortawesome/react-fontawesome'
 import * as React from 'react'
 import {Link, useLocation, useNavigate} from 'react-router-dom'
 
-import {Button} from '@/components/ui/button'
-import {useLogout, useUser} from '@/lib/auth'
+import {useUser} from '@/lib/auth'
+import {AuthUser} from '@/types/api'
 
 export const Header = () => {
     const location = useLocation()
@@ -73,31 +77,7 @@ export const Header = () => {
 }
 
 const Navbar = () => {
-    const location = useLocation()
-    const navigate = useNavigate()
     const user = useUser()
-    const logout = useLogout()
-
-    const handleLogOutClick = () => {
-        setAnchorElUser(null)
-        logout.mutate({})
-    }
-
-    // profile dropdown menu
-    const [anchorElUser, setAnchorElUser] = React.useState<null | HTMLElement>(
-        null,
-    )
-    const handleOpenUserMenu = (event: React.MouseEvent<HTMLElement>) => {
-        setAnchorElUser(event.currentTarget)
-    }
-    const handleCloseUserMenu = () => {
-        setAnchorElUser(null)
-    }
-    const handleProfileClick = () => {
-        setAnchorElUser(null)
-        navigate(`/profile`)
-    }
-
     return (
         <div className="w-full flex justify-center bg-slate-800">
             <div className="w-full max-w-[1000px] flex justify-between px-2">
@@ -106,9 +86,7 @@ const Navbar = () => {
                     <NavLink to="/songs">songs</NavLink>
                 </nav>
                 {user?.data ? (
-                    <Button variant="contained" onClick={handleLogOutClick}>
-                        {user.data.username}
-                    </Button>
+                    <ProfileButton userData={user.data} />
                 ) : (
                     <nav className="flex gap-6">
                         <NavLink to="/auth/login">log in</NavLink>
@@ -147,5 +125,78 @@ const NavLink = ({to, className, children}: NavLinkProps) => {
         <Link to={to} className={finalStyle}>
             {children}
         </Link>
+    )
+}
+
+type ProfileButtonProps = {
+    userData: AuthUser
+    className?: string
+}
+
+const ProfileButton = ({userData, className}: ProfileButtonProps) => {
+    const [isOpen, setIsOpen] = React.useState(false)
+
+    const toggleDropdown = () => {
+        setIsOpen(!isOpen)
+    }
+
+    const buttonBaseStyle =
+        'flex items-center text-gray-400 hover:text-white pt-3 pb-[9px] cursor-pointer'
+    const buttonBorderStyle =
+        'border-b-[3px] border-transparent hover:border-b-white'
+    const activeStyle = 'text-white border-b-white'
+
+    const buttonFinalStyle = [
+        buttonBaseStyle,
+        buttonBorderStyle,
+        isOpen ? activeStyle : '',
+        className,
+    ]
+        .filter(Boolean)
+        .join(' ')
+
+    return (
+        <div className="relative">
+            <button className={buttonFinalStyle} onClick={toggleDropdown}>
+                {userData.gameName}
+                {isOpen ? (
+                    <FontAwesomeIcon
+                        icon={faAngleUp}
+                        className="mx-2"
+                        size="xs"
+                    />
+                ) : (
+                    <FontAwesomeIcon
+                        icon={faAngleDown}
+                        className="mx-2"
+                        size="xs"
+                    />
+                )}
+            </button>
+            {isOpen && (
+                <div className="absolute right-0 mt-2 w-30 rounded-sm shadow-lg bg-white ring-1 ring-black ring-opacity-5 z-10">
+                    <div className="py-1">
+                        <Link
+                            to={`/users/${userData.gameName}-${userData.tagLine}`}
+                            className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
+                        >
+                            Profile
+                        </Link>
+                        <Link
+                            to="/settings"
+                            className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
+                        >
+                            Settings
+                        </Link>
+                        <Link
+                            to="/auth/logout"
+                            className="block px-4 py-2 text-sm text-red-600 hover:bg-red-100"
+                        >
+                            Logout
+                        </Link>
+                    </div>
+                </div>
+            )}
+        </div>
     )
 }

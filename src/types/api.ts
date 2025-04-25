@@ -23,6 +23,8 @@ export type User = Entity<{
 
 export type AuthUser = Entity<{
     username: string
+    gameName: string
+    tagLine: string
     role: 'ADMIN' | 'USER'
 }>
 

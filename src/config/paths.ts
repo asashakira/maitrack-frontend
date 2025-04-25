@@ -15,6 +15,10 @@ export const paths = {
             getHref: (redirectTo?: string | null | undefined) =>
                 `/auth/login${redirectTo ? `?redirectTo=${encodeURIComponent(redirectTo)}` : ''}`,
         },
+        logout: {
+            path: '/auth/logout',
+            getHref: () => `/auth/logout`,
+        },
     },
 
     users: {
