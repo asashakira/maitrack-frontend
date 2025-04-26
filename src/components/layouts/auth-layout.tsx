@@ -13,6 +13,8 @@ type AuthLayoutProps = {
 }
 
 export const AuthLayout = ({children}: AuthLayoutProps) => {
+    document.body.classList = 'bg-neutral-100'
+
     const user = useUser()
     const [searchParams] = useSearchParams()
     const redirectTo = searchParams.get('redirectTo')
@@ -28,7 +30,7 @@ export const AuthLayout = ({children}: AuthLayoutProps) => {
     }, [user.data, navigate, redirectTo])
 
     return (
-        <div className="flex flex-col bg-neutral-100 min-h-screen">
+        <div className="flex flex-col min-h-screen">
             <Header />
             <div className="flex flex-col items-center flex-grow">
                 {children}
