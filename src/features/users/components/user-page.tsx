@@ -53,7 +53,7 @@ export const UserPage = ({maiID}: {maiID: string}) => {
     }
 
     return (
-        <div className="px-2 my-4">
+        <div className="w-full max-w-[500px] px-1 my-4">
             {/* Profile section */}
             <div className="flex">
                 {/* Profile Icon */}
@@ -115,18 +115,13 @@ export const UserPage = ({maiID}: {maiID: string}) => {
                     Recent
                 </span>
             </div>
-
-            {/* TODO: loading circle */}
-            {updateUserMutation.isPending ?? (
-                <div className="my-2">Loading...</div>
-            )}
-
             {scoresQuery.data?.pages.map(page =>
                 page.data.scores?.map((score: Score) => (
                     <ScoreCard key={score.scoreID} score={score} />
                 )),
             )}
 
+            {/* show more button */}
             {scoresQuery.hasNextPage && !scoresQuery.isFetching && (
                 <div className="text-center">
                     <Button
@@ -146,7 +141,7 @@ export const UserPage = ({maiID}: {maiID: string}) => {
 
 const ScoreCard = ({score}: {score: Score}) => {
     return (
-        <div className="flex items-center bg-slate-800 text-white rounded border border-zinc-700 mb-4 p-2 w-full max-w-3xl mx-auto">
+        <div className="flex bg-slate-800 text-white rounded border border-zinc-700 p-2 mb-4">
             {/* Image */}
             <img
                 src={score.imageUrl}
@@ -155,10 +150,14 @@ const ScoreCard = ({score}: {score: Score}) => {
             />
 
             {/* Main Info */}
-            <div className="flex flex-col h-24 items-stretch justify-between flex-grow ml-4">
+            <div className="flex flex-col h-24 justify-between ml-4 min-w-0">
                 <div>
-                    <h3 className="text-sm">{score.title}</h3>
-                    <p className="text-xs text-zinc-400">by {score.artist}</p>
+                    <div className="text-sm whitespace-nowrap truncate">
+                        {score.title}
+                    </div>
+                    <div className="text-xs text-zinc-400 whitespace-nowrap truncate overflow-hidden">
+                        by {score.artist}
+                    </div>
                 </div>
 
                 <div className="flex items-center gap-4 mt-2">
