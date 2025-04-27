@@ -22,17 +22,21 @@ export const paths = {
     },
 
     users: {
-        path: 'users/:maiID',
-        getHref: (maiID: string) => `/users/${maiID}`,
+        path: '/users/:maiID',
+        getHref: (id: string) => `/users/${id}`,
     },
 
     settings: {
-        path: 'settings',
+        path: '/settings',
         getHref: () => '/settings',
     },
 
     songs: {
-        path: 'songs',
+        path: '/songs',
         getHref: () => '/songs',
+    },
+    song: {
+        path: '/song/:songID',
+        getHref: (id: string) => `/app/discussions/${id}`,
     },
 } as const

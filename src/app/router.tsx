@@ -9,7 +9,8 @@ import RegisterRoute from './routes/auth/register'
 import LandingRoute from './routes/landing'
 import NotFoundRoute from './routes/not-found'
 import SettingsRoute from './routes/settings'
-import SongsRoute from './routes/songs'
+import SongRoute from './routes/songs/song'
+import SongsRoute from './routes/songs/songs'
 import UserRoute from './routes/users'
 
 export const AppRouter = () => {
@@ -28,6 +29,7 @@ export const AppRouter = () => {
                 />
                 <Route path={paths.users.path} element={<UserRoute />} />
                 <Route path={paths.songs.path} element={<SongsRoute />} />
+                <Route path={paths.song.path} element={<SongRoute />} />
                 <Route
                     path={paths.settings.path}
                     element={
