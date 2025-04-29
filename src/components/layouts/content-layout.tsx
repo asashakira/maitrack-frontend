@@ -14,7 +14,7 @@ export const ContentLayout = ({children}: ContentLayoutProps) => {
     return (
         <div className="flex flex-col min-h-screen">
             <Header />
-            <div className="flex flex-col items-center flex-grow">
+            <div className="flex flex-col items-center flex-grow w-full max-w-[1000px] mx-auto">
                 {children}
             </div>
             <Footer />

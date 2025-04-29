@@ -53,7 +53,7 @@ export const UserPage = ({maiID}: {maiID: string}) => {
     }
 
     return (
-        <div className="w-full max-w-[500px] px-1 my-4">
+        <div className="w-full px-1 my-4">
             {/* Profile section */}
             <div className="flex">
                 {/* Profile Icon */}
@@ -141,7 +141,7 @@ export const UserPage = ({maiID}: {maiID: string}) => {
 
 const ScoreCard = ({score}: {score: Score}) => {
     return (
-        <div className="flex bg-slate-800 text-white rounded border border-zinc-700 p-2 mb-4">
+        <div className="w-full flex bg-slate-800 text-white rounded border border-zinc-700 p-2 mb-4">
             {/* Image */}
             <img
                 src={score.imageUrl}
