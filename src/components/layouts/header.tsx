@@ -112,10 +112,15 @@ const NavLink = ({to, className, children}: NavLinkProps) => {
     const borderStyle = 'border-b-[3px] border-transparent hover:border-b-white'
     const activeStyle = 'font-bold !text-white border-b-white'
 
+    const isActive =
+        to === '/'
+            ? location.pathname === '/'
+            : location.pathname.startsWith(to)
+
     const finalStyle = [
         baseStyle,
         borderStyle,
-        location.pathname === to ? activeStyle : '',
+        isActive ? activeStyle : '',
         className,
     ]
         .filter(Boolean)

@@ -1,6 +1,7 @@
 import {Link, useSearchParams} from 'react-router-dom'
 
 import {LazyImage} from '@/components/ui/image'
+import {env} from '@/config/env'
 import {Song} from '@/types/api'
 
 import {useSongs} from '../api/get-songs'
@@ -23,8 +24,8 @@ export const SongsList = () => {
 
     // Filter
     const genreId = Number(searchParams.get('g'))
-    const versionId = Number(searchParams.get('v'))
     const genre = genres.find(g => g.id === genreId)?.name
+    const versionId = Number(searchParams.get('v'))
     const version = versions.find(v => v.id === versionId)?.name
     const filteredSongs = songs.filter(song => {
         const genreMatch = !genre || song.genre === genre
@@ -51,7 +52,7 @@ const SongsListItem = ({song}: {song: Song}) => {
             className="w-full flex bg-slate-800 text-white rounded-xl border border-zinc-700 p-1 hover:bg-slate-700"
         >
             <LazyImage
-                src={song.imageUrl}
+                src={`${env.S3_BUCKET_URL}songs/${song.imageUrl}`}
                 alt={song.title}
                 className="w-20 h-20 rounded-md object-cover"
             />

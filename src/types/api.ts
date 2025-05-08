@@ -45,14 +45,21 @@ export type Song = Entity<{
     version: string
     releaseDate: string
     deleteDate: string
+    beatmaps: Beatmap[]
 }>
 
 export type Beatmap = Entity<{
     beatmapID: string
-    difficulty: string
+    difficulty:
+        | 'basic'
+        | 'advanced'
+        | 'expert'
+        | 'master'
+        | 'remaster'
+        | 'utage'
     level: string
     internalLevel: number | null
-    type: string
+    type: 'std' | 'dx'
     totalNotes: number
     tap: number
     hold: number

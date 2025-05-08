@@ -1,6 +1,7 @@
 import {faAngleDown} from '@fortawesome/free-solid-svg-icons'
 import {FontAwesomeIcon} from '@fortawesome/react-fontawesome'
 import {useInfiniteQuery, useMutation} from '@tanstack/react-query'
+import {Link} from 'react-router-dom'
 
 import {Button} from '@/components/ui/button'
 import {Score, User} from '@/types/api'
@@ -144,7 +145,7 @@ const ScoreCard = ({score}: {score: Score}) => {
         <div className="w-full flex bg-slate-800 text-white rounded border border-zinc-700 p-2 mb-4">
             {/* Image */}
             <img
-                src={score.imageUrl}
+                src={`${import.meta.env.VITE_S3_BUCKET_URL}songs/${score.imageUrl}`}
                 alt={score.title}
                 className="w-24 h-24 object-cover rounded-lg"
             />
@@ -153,7 +154,12 @@ const ScoreCard = ({score}: {score: Score}) => {
             <div className="flex flex-col h-24 justify-between ml-4 min-w-0">
                 <div>
                     <div className="text-sm whitespace-nowrap truncate">
-                        {score.title}
+                        <Link
+                            to={`/songs/${score.songID}?${score.difficulty}`}
+                            className="hover:underline"
+                        >
+                            {score.title}
+                        </Link>
                     </div>
                     <div className="text-xs text-zinc-400 whitespace-nowrap truncate overflow-hidden">
                         by {score.artist}
