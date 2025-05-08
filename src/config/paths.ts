@@ -36,7 +36,7 @@ export const paths = {
         getHref: () => '/songs',
     },
     song: {
-        path: '/song/:songID',
-        getHref: (id: string) => `/app/discussions/${id}`,
+        path: '/songs/:songID',
+        getHref: (id: string) => `/songs/${id}`,
     },
 } as const
