@@ -6,17 +6,13 @@
     "type": "module",
     "scripts": {
         "dev": "vite",
-        "build": "tsc -b && vite build",
-        "lint": "eslint 'src/**/*.{js,ts,tsx}' --fix",
-        "format": "prettier --write 'src/**/*.{js,ts,tsx,json,md}'",
-        "preview": "vite preview"
+        "build": "tsc && vite build --base=/ --mode production",
+        "preview": "vite preview",
+        "lint": "eslint src --ignore-path .gitignore",
+        "format": "prettier --write 'src/**/*.{js,ts,tsx,json,md}'"
     },
     "dependencies": {
-        "@emotion/react": "^11.14.0",
-        "@emotion/styled": "^11.14.0",
         "@hookform/resolvers": "^3.3.4",
-        "@mui/icons-material": "^6.2.1",
-        "@mui/material": "^6.2.1",
         "@ngneat/falso": "^7.2.0",
         "axios": "^1.8.2",
         "class-variance-authority": "^0.7.0",
@@ -27,12 +23,16 @@
         "react-error-boundary": "^4.0.13",
         "react-helmet-async": "^2.0.4",
         "react-hook-form": "^7.55.0",
+        "react-intersection-observer": "^9.16.0",
         "react-query-auth": "^2.4.3",
         "react-router-dom": "^7.1.0",
         "zod": "^3.23.4"
     },
     "devDependencies": {
         "@eslint/eslintrc": "^3.0.2",
+        "@fortawesome/fontawesome-svg-core": "^6.7.2",
+        "@fortawesome/free-solid-svg-icons": "^6.7.2",
+        "@fortawesome/react-fontawesome": "^0.2.2",
         "@mswjs/data": "^0.16.1",
         "@mswjs/http-middleware": "^0.10.1",
         "@playwright/test": "^1.43.1",

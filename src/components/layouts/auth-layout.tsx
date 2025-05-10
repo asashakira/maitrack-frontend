@@ -4,7 +4,8 @@ import {useNavigate, useSearchParams} from 'react-router-dom'
 import {paths} from '@/config/paths'
 import {useUser} from '@/lib/auth'
 
-import {ContentLayout} from './content-layout'
+import {Footer} from './footer'
+import {Header} from './header'
 
 type AuthLayoutProps = {
     children: React.ReactNode
@@ -12,6 +13,8 @@ type AuthLayoutProps = {
 }
 
 export const AuthLayout = ({children}: AuthLayoutProps) => {
+    document.body.classList = 'bg-neutral-100'
+
     const user = useUser()
     const [searchParams] = useSearchParams()
     const redirectTo = searchParams.get('redirectTo')
@@ -26,5 +29,13 @@ export const AuthLayout = ({children}: AuthLayoutProps) => {
         }
     }, [user.data, navigate, redirectTo])
 
-    return <ContentLayout>{children}</ContentLayout>
+    return (
+        <div className="flex flex-col min-h-screen">
+            <Header />
+            <div className="flex flex-col items-center flex-grow">
+                {children}
+            </div>
+            <Footer />
+        </div>
+    )
 }
