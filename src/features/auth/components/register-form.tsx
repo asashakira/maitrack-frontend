@@ -31,7 +31,7 @@ export const RegisterForm = ({onSuccess}: RegisterFormProps) => {
                         tagLine: data.tagLine,
                     })
                 })}
-                className="border border-gray-300 rounded-sm shadow p-6 flex flex-col gap-4 max-w-md m-auto"
+                className="border border-gray-300 rounded-sm shadow-lg bg-white text-black p-6 flex flex-col gap-4 max-w-md m-auto"
             >
                 <h1 className="text-xl font-bold mb-2">Register</h1>
 

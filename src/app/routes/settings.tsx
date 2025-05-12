@@ -1,18 +1,16 @@
-import {Box} from '@mui/material'
-
 import {ContentLayout} from '@/components/layouts'
 import {useUser} from '@/lib/auth'
 
-const ProfileRoute = () => {
+const SettingsRoute = () => {
     const user = useUser()
 
     if (!user.data) return null
 
     return (
-        <ContentLayout title="Profile">
-            <Box>User Profile</Box>
+        <ContentLayout title="Settings">
+            <div>{user.data.username}</div>
         </ContentLayout>
     )
 }
 
-export default ProfileRoute
+export default SettingsRoute

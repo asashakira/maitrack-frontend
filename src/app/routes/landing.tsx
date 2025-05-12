@@ -1,11 +1,5 @@
-import {Search} from '@mui/icons-material'
-import {
-    Box,
-    IconButton,
-    InputAdornment,
-    TextField,
-    Typography,
-} from '@mui/material'
+import {faSearch} from '@fortawesome/free-solid-svg-icons'
+import {FontAwesomeIcon} from '@fortawesome/react-fontawesome'
 import * as React from 'react'
 import {useNavigate} from 'react-router-dom'
 
@@ -30,45 +24,34 @@ const LandingRoute = () => {
 
     return (
         <ContentLayout>
-            <Box sx={{pt: 15, pb: 15}}>
-                <Typography
-                    variant="h1"
-                    noWrap
-                    sx={{
-                        color: 'inherit',
-                        cursor: 'default',
-                        fontWeight: 700,
-                        letterSpacing: '.2rem',
-                        textDecoration: 'none',
-                    }}
-                >
+            <div className="pt-16 pb-16">
+                <h1 className="text-inherit cursor-default font-bold tracking-widest text-4xl">
                     MAITRACK
-                </Typography>
-            </Box>
-            <Box component="form" onSubmit={handleSubmit} sx={{width: 800}}>
-                <TextField
-                    variant="outlined"
-                    placeholder="GameName + #TagLine"
-                    value={maiID}
-                    onChange={handleChange}
-                    fullWidth
-                    slotProps={{
-                        input: {
-                            endAdornment: (
-                                <InputAdornment position="end">
-                                    <IconButton
-                                        aria-label="search"
-                                        disableRipple
-                                        type="submit"
-                                    >
-                                        <Search />
-                                    </IconButton>
-                                </InputAdornment>
-                            ),
-                        },
-                    }}
-                />
-            </Box>
+                </h1>
+            </div>
+            <div className="w-full max-w-xl px-4">
+                <form onSubmit={handleSubmit} className="w-full">
+                    <div className="relative">
+                        <input
+                            type="text"
+                            className="w-full border border-gray-300 bg-white text-black rounded-lg p-3 pl-4 pr-12 text-lg focus:outline-none"
+                            placeholder="Game name + #Tag line"
+                            value={maiID}
+                            onChange={handleChange}
+                        />
+                        <button
+                            type="submit"
+                            className="absolute right-3 top-1/2 transform -translate-y-1/2 p-2 bg-transparent border-none"
+                            disabled={maiID === ''}
+                        >
+                            <FontAwesomeIcon
+                                icon={faSearch}
+                                className="text-lime-400 cursor-pointer text-lg"
+                            />
+                        </button>
+                    </div>
+                </form>
+            </div>
         </ContentLayout>
     )
 }
