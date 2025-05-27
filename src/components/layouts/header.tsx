@@ -83,6 +83,7 @@ const Navbar = () => {
             <div className="w-full max-w-[1000px] flex justify-between px-2">
                 <nav className="flex gap-6">
                     <NavLink to="/">home</NavLink>
+                    <NavLink to="/about">about</NavLink>
                     <NavLink to="/songs">songs</NavLink>
                 </nav>
                 {user?.data ? (

@@ -12,12 +12,14 @@ import SettingsRoute from './routes/settings'
 import SongRoute from './routes/songs/song'
 import SongsRoute from './routes/songs/songs'
 import UserRoute from './routes/users'
+import AboutRoute from './routes/about'
 
 export const AppRouter = () => {
     return (
         <BrowserRouter>
             <Routes>
                 <Route path={paths.home.path} element={<LandingRoute />} />
+                <Route path={paths.about.path} element={<AboutRoute />} />
                 <Route
                     path={paths.auth.register.path}
                     element={<RegisterRoute />}

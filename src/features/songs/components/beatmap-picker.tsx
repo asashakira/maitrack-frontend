@@ -24,7 +24,7 @@ export const BeatmapTypePicker = ({beatmapTypes}: BeatmapTypePickerProps) => {
     }
 
     if (currentType === 'utage') {
-	return null
+        return null
     }
 
     return (
@@ -85,10 +85,13 @@ const BeatmapDifficultyPickerItem = ({
     const handleClick = () => {
         const nextParams = new URLSearchParams(searchParams.toString())
         nextParams.set('d', beatmap.difficulty)
-        setSearchParams(buildOrderedSearchParams({
-	    t: nextParams.get('t'),
-	    d: nextParams.get('d'),
-	}), {replace: true})
+        setSearchParams(
+            buildOrderedSearchParams({
+                t: nextParams.get('t'),
+                d: nextParams.get('d'),
+            }),
+            {replace: true},
+        )
     }
 
     const beatmapColor = colors[beatmap.difficulty]
