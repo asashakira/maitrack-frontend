@@ -86,19 +86,16 @@ export const UserPage = ({userID}: {userID: string}) => {
                             {user.userID}
                         </span>
                     </div>
-                    <div className="flex flex-col">
+                    <div className="flex gap-2">
                         <Button
                             size="small"
-                            className="w-20 h-10"
                             onClick={handleUpdateButton}
                             isLoading={updateUserMutation.isPending}
                             disabled={disableUpdateButton}
                         >
-                            {updateUserMutation.isPending
-                                ? 'Updated'
-                                : 'Update'}
+                            {disableUpdateButton ? 'Updated' : 'Update'}
                         </Button>
-                        <span className="text-xs text-gray-500 mt-2 self-end">
+                        <span className="text-xs text-gray-500 self-end">
                             最近のアップデート: {lastUpdatedAt}
                         </span>
                     </div>
