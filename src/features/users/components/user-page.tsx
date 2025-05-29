@@ -66,7 +66,7 @@ export const UserPage = ({userID}: {userID: string}) => {
                 <div className="ml-4 flex flex-col justify-between">
                     <div className="flex flex-col">
                         <span className="text-xl font-bold">{user.displayName}</span>
-                        <span className="text-gray-500 text-xs">@{user.userID}</span>
+                        <span className="text-gray-500 text-xs">{user.userID}</span>
                     </div>
 
                     <div>
