@@ -40,12 +40,12 @@ export const UserPage = ({userID}: {userID: string}) => {
             </div>
         )
     }
-    if (userQuery.error) return <div>Error loading user data</div>
-    if (scoresQuery.error) return <div>Error loading user scores</div>
+    // if (userQuery.error) return <div>Error loading user data</div>
+    // if (scoresQuery.error) return <div>Error loading user scores</div>
 
     const user: User | undefined = userQuery?.data?.data
 
-    if (!user) return <div>User Not Found</div>
+    if (!user) return <UserNotFound />
 
     // Update Button
     const lastScrapedAt = new Date(user.lastScrapedAt).getTime()
@@ -239,3 +239,20 @@ export const ScoreRankBadge = ({accuracy}: ScoreRankBadgeProps) => {
         </div>
     )
 }
+
+const UserNotFound = () => {
+    return (
+        <div className="mt-20 bg-gray-900 flex flex-col items-center justify-center text-white text-center px-4">
+            <h1 className="text-3xl font-bold mb-4">
+                ユーザーが見つかりません
+            </h1>
+            <p className="text-gray-300 mb-6">
+                入力されたUser IDに一致するユーザーが存在しませんでした。
+                <br />
+                IDを確認して、もう一度お試しください。
+            </p>
+        </div>
+    )
+}
+
+export default UserNotFound
