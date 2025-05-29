@@ -53,31 +53,54 @@ export const UserPage = ({userID}: {userID: string}) => {
         updateUserMutation.mutate({userID})
     }
 
+    const date = new Date(lastScrapedAt)
+    const lastUpdatedAt =
+        date.getFullYear() +
+        '/' +
+        String(date.getMonth() + 1).padStart(2, '0') +
+        '/' +
+        String(date.getDate()).padStart(2, '0') +
+        ' ' +
+        String(date.getHours()).padStart(2, '0') +
+        ':' +
+        String(date.getMinutes()).padStart(2, '0')
+
     return (
         <div className="w-full px-1 my-4">
             {/* Profile section */}
             <div className="flex">
                 {/* Profile Icon */}
-                <div className="w-[100px] h-[100px] bg-gray-400 rounded">
-                    {/* TODO: Profile picture here */}
+                <div className="w-[100px]">
+                    <div className="w-[100px] h-[100px] bg-gray-400 rounded">
+                        {/* TODO: Profile picture here */}
+                    </div>
                 </div>
 
                 {/* User Info */}
-                <div className="ml-4 flex flex-col justify-between">
+                <div className="ml-4 flex flex-col gap-4">
                     <div className="flex flex-col">
-                        <span className="text-xl font-bold">{user.displayName}</span>
-                        <span className="text-gray-500 text-xs">{user.userID}</span>
+                        <span className="text-xl font-bold">
+                            {user.displayName}
+                        </span>
+                        <span className="text-gray-500 text-xs">
+                            {user.userID}
+                        </span>
                     </div>
-
-                    <div>
+                    <div className="flex flex-col">
                         <Button
                             size="small"
+                            className="w-20 h-10"
                             onClick={handleUpdateButton}
                             isLoading={updateUserMutation.isPending}
                             disabled={disableUpdateButton}
                         >
-                            Update
+                            {updateUserMutation.isPending
+                                ? 'Updated'
+                                : 'Update'}
                         </Button>
+                        <span className="text-xs text-gray-500 mt-2 self-end">
+                            最近のアップデート: {lastUpdatedAt}
+                        </span>
                     </div>
                 </div>
             </div>
