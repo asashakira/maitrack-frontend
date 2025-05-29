@@ -1,6 +1,7 @@
 import {Link, useSearchParams} from 'react-router-dom'
 
 import {LazyImage} from '@/components/ui/image'
+import {Spinner} from '@/components/ui/spinner/spinner'
 import {env} from '@/config/env'
 import {Song} from '@/types/api'
 
@@ -14,13 +15,15 @@ export const SongsList = () => {
     const songQuery = useSongs({})
 
     if (songQuery.isLoading) {
-        return <div>Loading...</div>
+        return (
+            <div className="flex h-48 w-full items-center justify-center">
+                <Spinner size="lg" />
+            </div>
+        )
     }
 
     const songs: Song[] | undefined = songQuery?.data?.data
-    if (!songs) {
-        return <div>Song Not Found</div>
-    }
+    if (!songs) return null
 
     // Filter
     const genreId = Number(searchParams.get('g'))

@@ -1,6 +1,7 @@
 import * as React from 'react'
 import {useSearchParams} from 'react-router-dom'
 
+import {Spinner} from '@/components/ui/spinner/spinner'
 import {env} from '@/config/env'
 import type {Song} from '@/types/api'
 
@@ -52,11 +53,13 @@ export const SongView = ({songID}: {songID: string}) => {
     }, [song, difficulty, beatmapType, searchParams, setSearchParams])
 
     if (songQuery.isLoading) {
-        return <div>Loading...</div>
+        return (
+            <div className="flex h-48 w-full items-center justify-center">
+                <Spinner size="lg" />
+            </div>
+        )
     }
-    if (!song) {
-        return <div>Song Not Found</div>
-    }
+    if (!song) return null
 
     const availableBeatmapTypes = Array.from(
         new Set(song.beatmaps.map(b => b.type)),

@@ -4,6 +4,7 @@ import {useInfiniteQuery, useMutation} from '@tanstack/react-query'
 import {Link} from 'react-router-dom'
 
 import {Button} from '@/components/ui/button'
+import {Spinner} from '@/components/ui/spinner/spinner'
 import {Score, User} from '@/types/api'
 import {getScoreRank} from '@/utils/maimai'
 
@@ -32,8 +33,13 @@ export const UserPage = ({userID}: {userID: string}) => {
         },
     })
 
-    if (userQuery.isLoading || scoresQuery.isLoading)
-        return <div>Loading...</div>
+    if (userQuery.isLoading || scoresQuery.isLoading) {
+        return (
+            <div className="flex h-48 w-full items-center justify-center">
+                <Spinner size="lg" />
+            </div>
+        )
+    }
     if (userQuery.error) return <div>Error loading user data</div>
     if (scoresQuery.error) return <div>Error loading user scores</div>
 

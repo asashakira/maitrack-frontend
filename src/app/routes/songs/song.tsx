@@ -1,6 +1,7 @@
 import {useParams} from 'react-router-dom'
 
 import {ContentLayout} from '@/components/layouts'
+import {Spinner} from '@/components/ui/spinner/spinner'
 import {useSong} from '@/features/songs/api/get-song'
 import {SongView} from '@/features/songs/components/song-view'
 
@@ -11,9 +12,11 @@ const SongRoute = () => {
 
     if (songQuery.isLoading) {
         return (
-            <div className="flex h-48 w-full items-center justify-center">
-                {/* <Spinner size="lg" /> */}
-            </div>
+            <ContentLayout title="">
+                <div className="flex h-48 w-full items-center justify-center">
+                    <Spinner size="lg" />
+                </div>
+            </ContentLayout>
         )
     }
 
