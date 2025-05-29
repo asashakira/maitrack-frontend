@@ -13,10 +13,16 @@ export type Entity<T> = {
 export type User = Entity<{
     userID: string
     displayName: string
+    lastPlayedAt: string
+    lastScrapedAt: string
+    scrapeStatus: string
     rating: string
     seasonPlayCount: string
     totalPlayCount: string
-    lastScrapedAt: string
+    bio: string
+    profileImageUrl: string
+    location: string
+    twitterID: string
 }>
 
 export type AuthUser = Entity<{

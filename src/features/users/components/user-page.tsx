@@ -76,11 +76,11 @@ export const UserPage = ({userID}: {userID: string}) => {
             {/* Profile section */}
             <div className="flex">
                 {/* Profile Icon */}
-                <div className="w-[100px]">
-                    <div className="w-[100px] h-[100px] bg-gray-400 rounded">
-                        {/* TODO: Profile picture here */}
-                    </div>
-                </div>
+                <img
+                    src={user.profileImageUrl}
+                    alt={user.displayName}
+                    className="w-[100px] h-[100px] bg-gray-400 rounded-lg text-xs"
+                />
 
                 {/* User Info */}
                 <div className="ml-4 flex flex-col gap-4">
