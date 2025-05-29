@@ -1,7 +1,7 @@
 import {useSearchParams} from 'react-router-dom'
 
-import type {Beatmap} from '@/types/api'
 import {env} from '@/config/env'
+import type {Beatmap} from '@/types/api'
 
 type BeatmapTypePickerProps = {
     beatmapTypes: string[]
@@ -32,6 +32,7 @@ export const BeatmapTypePicker = ({beatmapTypes}: BeatmapTypePickerProps) => {
             {beatmapTypes.map(type => (
                 <button key={type} onClick={() => handleSelect(type)}>
                     <img
+                        alt={type}
                         src={`${env.S3_BUCKET_URL}beatmap-type/${type}.png`}
                         className={`cursor-pointer ${
                             currentType === type

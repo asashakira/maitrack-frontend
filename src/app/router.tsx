@@ -3,6 +3,7 @@ import {BrowserRouter, Route, Routes} from 'react-router-dom'
 import {paths} from '@/config/paths'
 import {ProtectedRoute} from '@/lib/auth'
 
+import AboutRoute from './routes/about'
 import LoginRoute from './routes/auth/login'
 import LogoutRoute from './routes/auth/logout'
 import RegisterRoute from './routes/auth/register'
@@ -12,7 +13,6 @@ import SettingsRoute from './routes/settings'
 import SongRoute from './routes/songs/song'
 import SongsRoute from './routes/songs/songs'
 import UserRoute from './routes/users'
-import AboutRoute from './routes/about'
 
 export const AppRouter = () => {
     return (
