@@ -9,7 +9,7 @@ const LoginRoute = () => {
     const [searchParams] = useSearchParams()
     const redirectTo = searchParams.get('redirectTo')
     return (
-        <AuthLayout>
+        <AuthLayout title="Login">
             <LoginForm
                 onSuccess={() => {
                     navigate(redirectTo || paths.home.getHref(), {

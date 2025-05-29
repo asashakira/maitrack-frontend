@@ -3,7 +3,7 @@ import {AboutPage} from '@/features/about/components/about-page'
 
 const AboutRoute = () => {
     return (
-        <ContentLayout>
+        <ContentLayout title="About">
             <AboutPage />
         </ContentLayout>
     )

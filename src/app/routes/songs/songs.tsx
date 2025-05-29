@@ -3,7 +3,7 @@ import {SongsList} from '@/features/songs/components/songs-list'
 
 const SongsRoute = () => {
     return (
-        <ContentLayout>
+        <ContentLayout title="Songs">
             <SongsList />
         </ContentLayout>
     )

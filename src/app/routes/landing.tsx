@@ -22,7 +22,7 @@ const LandingRoute = () => {
     }
 
     return (
-        <ContentLayout>
+        <ContentLayout title="Welcome To Maitrack">
             <div className="pt-16 pb-16">
                 <h1 className="text-inherit cursor-default font-bold tracking-widest text-4xl">
                     MAITRACK
