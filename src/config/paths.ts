@@ -27,7 +27,7 @@ export const paths = {
     },
 
     users: {
-        path: '/users/:maiID',
+        path: '/users/:userID',
         getHref: (id: string) => `/users/${id}`,
     },
 

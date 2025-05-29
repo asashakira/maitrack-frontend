@@ -15,20 +15,19 @@ export const Header = () => {
     const navigate = useNavigate()
 
     // search
-    const [maiID, setMaiID] = React.useState<string>('')
+    const [userID, setUserID] = React.useState<string>('')
     const searchInputRef = React.useRef<HTMLInputElement>(null)
     const handleSearchInputChange = (
         e: React.ChangeEvent<HTMLInputElement>,
     ) => {
-        setMaiID(e.target.value)
+        setUserID(e.target.value)
     }
     const handleSearchSubmit = (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault()
         // TODO: search like opgg
         // also make search page
-        const [gameName, tagLine] = maiID.replace(/\s+/g, '').split('#')
-        navigate(`/users/${gameName}-${tagLine}`)
-        setMaiID('')
+        navigate(`/users/${userID}`)
+        setUserID('')
         searchInputRef.current?.blur()
     }
 
@@ -51,14 +50,14 @@ export const Header = () => {
                                     ref={searchInputRef}
                                     type="text"
                                     className="w-full bg-white text-black rounded-sm p-2 pl-3 pr-12 text-sm focus:outline-none"
-                                    placeholder="Game name + #Tag line"
-                                    value={maiID}
+                                    placeholder="type to search"
+                                    value={userID}
                                     onChange={handleSearchInputChange}
                                 />
                                 <button
                                     type="submit"
                                     className="absolute right-2 top-1/2 -translate-y-1/2 p-2"
-                                    // disabled={maiID === ''}
+                                    disabled={userID === ''}
                                 >
                                     <FontAwesomeIcon
                                         icon={faSearch}
@@ -164,7 +163,7 @@ const ProfileButton = ({userData, className}: ProfileButtonProps) => {
     return (
         <div className="relative">
             <button className={buttonFinalStyle} onClick={toggleDropdown}>
-                {userData.gameName}
+                {userData.displayName}
                 {isOpen ? (
                     <FontAwesomeIcon
                         icon={faAngleUp}
@@ -183,22 +182,22 @@ const ProfileButton = ({userData, className}: ProfileButtonProps) => {
                 <div className="absolute right-0 mt-2 w-30 rounded-sm shadow-lg bg-white ring-1 ring-black ring-opacity-5 z-10">
                     <div className="py-1">
                         <Link
-                            to={`/users/${userData.gameName}-${userData.tagLine}`}
+                            to={`/users/${userData.userID}`}
                             className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
                         >
-                            Profile
+                            プロフィール
                         </Link>
                         <Link
                             to="/settings"
                             className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
                         >
-                            Settings
+                            設定
                         </Link>
                         <Link
                             to="/auth/logout"
                             className="block px-4 py-2 text-sm text-red-600 hover:bg-red-100"
                         >
-                            Logout
+                            ログアウト
                         </Link>
                     </div>
                 </div>

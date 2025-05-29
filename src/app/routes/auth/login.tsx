@@ -12,12 +12,9 @@ const LoginRoute = () => {
         <AuthLayout>
             <LoginForm
                 onSuccess={() => {
-                    navigate(
-                        `${redirectTo ? `${redirectTo}` : paths.home.getHref()}`,
-                        {
-                            replace: true,
-                        },
-                    )
+                    navigate(redirectTo || paths.home.getHref(), {
+                        replace: true,
+                    })
                 }}
             />
         </AuthLayout>

@@ -56,7 +56,7 @@ export const BeatmapDifficultyPicker = ({
         <div className="flex gap-3">
             {beatmaps.map(beatmap => (
                 <BeatmapDifficultyPickerItem
-                    key={beatmap.beatmapID}
+                    key={beatmap.id}
                     beatmap={beatmap}
                 />
             ))}

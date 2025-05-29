@@ -11,14 +11,14 @@ import {useUser} from '../api/get-user'
 import {fetchScores} from '../api/get-user-scores'
 import {updateUser} from '../api/update-user-page'
 
-export const UserPage = ({maiID}: {maiID: string}) => {
+export const UserPage = ({userID}: {userID: string}) => {
     const userQuery = useUser({
-        maiID,
+        userID,
     })
 
     const scoresQuery = useInfiniteQuery({
-        queryKey: ['scores', maiID],
-        queryFn: ({pageParam}) => fetchScores({pageParam, maiID}),
+        queryKey: ['scores', userID],
+        queryFn: ({pageParam}) => fetchScores({pageParam, userID}),
         initialPageParam: 0,
         getNextPageParam: lastPage =>
             lastPage.data.hasMore ? lastPage.data.nextOffset : undefined,
@@ -50,7 +50,7 @@ export const UserPage = ({maiID}: {maiID: string}) => {
         now < updateAvailableAt || updateUserMutation.isPending
 
     const handleUpdateButton = () => {
-        updateUserMutation.mutate({maiID})
+        updateUserMutation.mutate({userID})
     }
 
     return (
@@ -64,9 +64,9 @@ export const UserPage = ({maiID}: {maiID: string}) => {
 
                 {/* User Info */}
                 <div className="ml-4 flex flex-col justify-between">
-                    <div className="text-xl font-bold flex items-center gap-2">
-                        <span>{user.gameName}</span>
-                        <span className="text-gray-500">#{user.tagLine}</span>
+                    <div className="flex flex-col">
+                        <span className="text-xl font-bold">{user.displayName}</span>
+                        <span className="text-gray-500 text-xs">@{user.userID}</span>
                     </div>
 
                     <div>
@@ -118,7 +118,7 @@ export const UserPage = ({maiID}: {maiID: string}) => {
             </div>
             {scoresQuery.data?.pages.map(page =>
                 page.data.scores?.map((score: Score) => (
-                    <ScoreCard key={score.scoreID} score={score} />
+                    <ScoreCard key={score.id} score={score} />
                 )),
             )}
 
@@ -155,7 +155,7 @@ const ScoreCard = ({score}: {score: Score}) => {
                 <div>
                     <div className="text-sm whitespace-nowrap truncate">
                         <Link
-                            to={`/songs/${score.songID}?v=${score.type}&d=${score.difficulty}`}
+                            to={`/songs/${score.id}?v=${score.type}&d=${score.difficulty}`}
                             className="hover:underline"
                         >
                             {score.title}

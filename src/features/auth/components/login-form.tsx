@@ -1,5 +1,6 @@
 import {FieldError, useForm} from 'react-hook-form'
 import {Link} from 'react-router-dom'
+import {useQueryClient} from '@tanstack/react-query'
 
 import {Button} from '@/components/ui/button'
 import {Input} from '@/components/ui/form'
@@ -16,37 +17,45 @@ export const LoginForm = ({onSuccess}: LoginFormProps) => {
         handleSubmit,
         formState: {errors},
     } = useForm()
-    const login = useLogin({onSuccess})
+    const queryClient = useQueryClient()
+    const login = useLogin({
+        onSuccess: () => {
+            queryClient.invalidateQueries({
+                queryKey: ['authenticated-user'],
+            })
+            onSuccess()
+        },
+    })
 
     return (
         <div className="w-full px-3 py-10">
             <form
                 onSubmit={handleSubmit(data => {
                     login.mutate({
-                        username: data.username,
+                        userID: data.userID,
                         password: data.password,
                     })
                 })}
                 className="border border-gray-300 rounded-sm shadow-lg bg-white text-black p-6 flex flex-col gap-4 max-w-md m-auto"
             >
-                <h1 className="text-xl font-bold mb-2">Log in</h1>
+                <h1 className="text-xl font-bold mb-2">ログイン</h1>
 
                 <Input
                     type="text"
-                    label="Username"
-                    placeholder="Username"
-                    error={errors.username as FieldError | undefined}
-                    registration={register('username', {
-                        required: 'Username is required',
+                    label="User ID"
+                    placeholder="User ID"
+                    error={errors.userID as FieldError | undefined}
+                    registration={register('userID', {
+                        required: 'User ID を入力してください',
                     })}
                 />
                 <Input
                     type="password"
-                    label="Password"
+                    label="パスワード"
                     placeholder="Password"
                     error={errors.password as FieldError | undefined}
                     registration={register('password', {
-                        required: 'Password is required',
+                        required: 'パスワードを入力してください',
                     })}
                 />
 
@@ -56,18 +65,18 @@ export const LoginForm = ({onSuccess}: LoginFormProps) => {
                     size="small"
                     disabled={login.isPending}
                 >
-                    Log in
+                    ログイン
                 </Button>
 
                 <div className="flex justify-between text-sm">
                     <div className="text-red-500">
-                        {login.isError ? 'Login Failed' : ''}
+                        {login.isError ? 'ログインに失敗しました' : ''}
                     </div>
                     <Link
                         to={paths.auth.register.getHref()}
                         className="text-lime-600 hover:underline"
                     >
-                        Register
+                        新規登録
                     </Link>
                 </div>
             </form>

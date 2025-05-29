@@ -12,7 +12,7 @@ const getUser = async (): Promise<AuthUser> => {
 }
 
 export type LoginInput = {
-    username: string
+    userID: string
     password: string
 }
 const login = (data: LoginInput): Promise<AuthResponse> => {
@@ -20,10 +20,9 @@ const login = (data: LoginInput): Promise<AuthResponse> => {
 }
 
 export type RegisterInput = {
-    username: string
+    userID: string
+    displayName: string
     password: string
-    gameName: string
-    tagLine: string
     segaID: string
     segaPassword: string
 }

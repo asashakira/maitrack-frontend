@@ -1,5 +1,5 @@
 import {api} from '@/lib/api-client'
 
-export const updateUser = ({maiID}: {maiID: string}) => {
-    return api.post(`/users/by-mai-id/${maiID}/update`)
+export const updateUser = ({userID}: {userID: string}) => {
+    return api.post(`/users/by-user-id/${userID}/update`)
 }

@@ -38,7 +38,7 @@ export const SongsList = () => {
             <SearchFilters />
             <div className="grid grid-cols-1 md:grid-cols-2 gap-2">
                 {filteredSongs.map(song => (
-                    <SongsListItem key={song.songID} song={song} />
+                    <SongsListItem key={song.id} song={song} />
                 ))}
             </div>
         </div>
@@ -48,7 +48,7 @@ export const SongsList = () => {
 const SongsListItem = ({song}: {song: Song}) => {
     return (
         <Link
-            to={song.songID}
+            to={song.id}
             className="w-full flex bg-slate-800 text-white rounded-xl border border-zinc-700 p-1 hover:bg-slate-700"
         >
             <LazyImage

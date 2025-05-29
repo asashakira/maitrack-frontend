@@ -8,18 +8,17 @@ import {ContentLayout} from '@/components/layouts'
 const LandingRoute = () => {
     const navigate = useNavigate()
 
-    const [maiID, setMaiID] = React.useState<string>('')
+    const [userID, setUserID] = React.useState<string>('')
 
     const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-        setMaiID(e.target.value)
+        setUserID(e.target.value)
     }
 
     const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault()
         // TODO: search like opgg
         // also make search page
-        const [gameName, tagLine] = maiID.replace(/\s+/g, '').split('#')
-        navigate(`/users/${gameName}-${tagLine}`)
+        navigate(`/users/${userID}`)
     }
 
     return (
@@ -35,14 +34,14 @@ const LandingRoute = () => {
                         <input
                             type="text"
                             className="w-full border border-gray-300 bg-white text-black rounded-lg p-3 pl-4 pr-12 text-lg focus:outline-none"
-                            placeholder="Game name + #Tag line"
-                            value={maiID}
+                            placeholder="type to search"
+                            value={userID}
                             onChange={handleChange}
                         />
                         <button
                             type="submit"
                             className="absolute right-3 top-1/2 transform -translate-y-1/2 p-2 bg-transparent border-none"
-                            disabled={maiID === ''}
+                            disabled={userID === ''}
                         >
                             <FontAwesomeIcon
                                 icon={faSearch}

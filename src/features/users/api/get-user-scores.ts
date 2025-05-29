@@ -3,14 +3,14 @@ import {ScoresResponse} from '@/types/api'
 
 export const fetchScores = async ({
     pageParam = 0,
-    maiID,
+    userID,
 }: {
     pageParam: number
-    maiID: string
+    userID: string
 }): Promise<{
     data: ScoresResponse
 }> => {
     return api.get(
-        `/users/by-mai-id/${maiID}/scores?limit=10&offset=${pageParam}`,
+        `/users/by-user-id/${userID}/scores?limit=10&offset=${pageParam}`,
     )
 }

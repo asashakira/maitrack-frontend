@@ -3,8 +3,7 @@
 // with the backend instead of manually writing them out
 
 export type BaseEntity = {
-    createdAt: number
-    updatedAt: number
+    id: string
 }
 
 export type Entity<T> = {
@@ -13,8 +12,7 @@ export type Entity<T> = {
 
 export type User = Entity<{
     userID: string
-    gameName: string
-    tagLine: string
+    displayName: string
     rating: string
     seasonPlayCount: string
     totalPlayCount: string
@@ -22,10 +20,8 @@ export type User = Entity<{
 }>
 
 export type AuthUser = Entity<{
-    username: string
-    gameName: string
-    tagLine: string
-    role: 'ADMIN' | 'USER'
+    userID: string
+    displayName: string
 }>
 
 export type AuthResponse = {
@@ -34,7 +30,6 @@ export type AuthResponse = {
 }
 
 export type Song = Entity<{
-    songID: string
     title: string
     artist: string
     genre: string
@@ -49,7 +44,6 @@ export type Song = Entity<{
 }>
 
 export type Beatmap = Entity<{
-    beatmapID: string
     difficulty:
         | 'basic'
         | 'advanced'
@@ -59,7 +53,7 @@ export type Beatmap = Entity<{
         | 'utage'
     level: string
     internalLevel: number | null
-    type: 'std' | 'dx'
+    type: 'std' | 'dx' | 'utage'
     totalNotes: number
     tap: number
     hold: number
@@ -78,7 +72,6 @@ export type ScoresResponse = {
 }
 
 export type Score = Entity<{
-    scoreID: string
     userID: string
     accuracy: string
     maxCombo: number

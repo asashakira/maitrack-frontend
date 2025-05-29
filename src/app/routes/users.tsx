@@ -5,11 +5,11 @@ import {UserPage} from '@/features/users/components/user-page'
 
 const UserRoute = () => {
     const params = useParams()
-    const maiID = params.maiID as string
+    const userID = params.userID as string
 
     return (
-        <ContentLayout title={maiID}>
-            <UserPage maiID={maiID} />
+        <ContentLayout title={userID}>
+            <UserPage userID={userID} />
         </ContentLayout>
     )
 }

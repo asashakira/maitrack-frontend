@@ -23,34 +23,42 @@ export const RegisterForm = ({onSuccess}: RegisterFormProps) => {
             <form
                 onSubmit={handleSubmit(data => {
                     registering.mutate({
-                        username: data.username,
+                        userID: data.userID,
                         password: data.password,
+                        displayName: data.displayName,
                         segaID: data.segaID,
                         segaPassword: data.segaPassword,
-                        gameName: data.gameName,
-                        tagLine: data.tagLine,
                     })
                 })}
                 className="border border-gray-300 rounded-sm shadow-lg bg-white text-black p-6 flex flex-col gap-4 max-w-md m-auto"
             >
-                <h1 className="text-xl font-bold mb-2">Register</h1>
+                <h1 className="text-xl font-bold mb-2">新規登録</h1>
 
                 <Input
                     type="text"
-                    label="Username"
-                    placeholder="Username"
+                    label="User ID"
+                    placeholder="User ID"
                     error={errors.username as FieldError | undefined}
-                    registration={register('username', {
-                        required: 'Username is required',
+                    registration={register('userID', {
+                        required: 'User IDは必須です',
+                    })}
+                />
+                <Input
+                    type="text"
+                    label="表示名"
+                    placeholder="Display Name"
+                    error={errors.displayName as FieldError | undefined}
+                    registration={register('displayName', {
+                        required: '表示名は必須です',
                     })}
                 />
                 <Input
                     type="password"
-                    label="Password"
+                    label="パスワード"
                     placeholder="Password"
                     error={errors.password as FieldError | undefined}
                     registration={register('password', {
-                        required: 'Password is required',
+                        required: 'パスワードは必須です',
                     })}
                 />
                 <Input
@@ -59,46 +67,18 @@ export const RegisterForm = ({onSuccess}: RegisterFormProps) => {
                     placeholder="SEGA ID"
                     error={errors.segaID as FieldError | undefined}
                     registration={register('segaID', {
-                        required: 'SEGA ID is required',
+                        required: 'SEGA ID は必須です',
                     })}
                 />
                 <Input
                     type="password"
-                    label="SEGA Password"
+                    label="SEGA パスワード"
                     placeholder="SEGA Password"
                     error={errors.segaPassword as FieldError | undefined}
                     registration={register('segaPassword', {
-                        required: 'SEGA Password is required',
+                        required: 'SEGA パスワード は必須です',
                     })}
                 />
-                <div className="flex gap-4">
-                    <div className="flex-1">
-                        <Input
-                            type="text"
-                            label="Game Name"
-                            placeholder="Game Name"
-                            error={errors.gameName as FieldError | undefined}
-                            registration={register('gameName', {
-                                required: 'Game Name is required',
-                            })}
-                        />
-                    </div>
-                    <div className="relative flex-1">
-                        <span className="absolute left-3 top-[29px] text-gray-400 text-sm">
-                            #
-                        </span>
-                        <Input
-                            type="text"
-                            label="Tag Line"
-                            placeholder="Tag Line"
-                            error={errors.tagLine as FieldError | undefined}
-                            registration={register('tagLine', {
-                                required: 'Tag Line is required',
-                            })}
-                            className="pl-6"
-                        />
-                    </div>
-                </div>
 
                 <Button
                     type="submit"
@@ -106,18 +86,18 @@ export const RegisterForm = ({onSuccess}: RegisterFormProps) => {
                     size="small"
                     isLoading={registering.isPending}
                 >
-                    Register
+                    登録
                 </Button>
 
                 <div className="flex justify-between text-sm">
                     <div className="text-red-500">
-                        {registering.isError ? 'Register Failed' : ''}
+                        {registering.isError ? '登録に失敗しました' : ''}
                     </div>
                     <Link
                         to={paths.auth.login.getHref()}
                         className="text-lime-600 hover:underline"
                     >
-                        Log in
+                        ログイン
                     </Link>
                 </div>
             </form>

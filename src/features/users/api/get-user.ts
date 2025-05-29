@@ -4,25 +4,25 @@ import {api} from '@/lib/api-client'
 import {QueryConfig} from '@/lib/react-query'
 import {User} from '@/types/api'
 
-export const getUser = ({maiID}: {maiID: string}): Promise<{data: User}> => {
-    return api.get(`/users/by-mai-id/${maiID}`)
+export const getUser = ({userID}: {userID: string}): Promise<{data: User}> => {
+    return api.get(`/users/by-user-id/${userID}`)
 }
 
-export const getUserQueryOptions = (maiID: string) => {
+export const getUserQueryOptions = (userID: string) => {
     return queryOptions({
-        queryKey: ['users', maiID],
-        queryFn: () => getUser({maiID}),
+        queryKey: ['users', userID],
+        queryFn: () => getUser({userID}),
     })
 }
 
 type UseUserOptions = {
-    maiID: string
+    userID: string
     queryConfig?: QueryConfig<typeof getUserQueryOptions>
 }
 
-export const useUser = ({maiID, queryConfig}: UseUserOptions) => {
+export const useUser = ({userID, queryConfig}: UseUserOptions) => {
     return useQuery({
-        ...getUserQueryOptions(maiID),
+        ...getUserQueryOptions(userID),
         ...queryConfig,
     })
 }

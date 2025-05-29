@@ -8,7 +8,7 @@ const SettingsRoute = () => {
 
     return (
         <ContentLayout title="Settings">
-            <div>{user.data.username}</div>
+            <div>Under Construction</div>
         </ContentLayout>
     )
 }
