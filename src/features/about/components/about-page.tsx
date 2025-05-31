@@ -20,7 +20,7 @@ export const AboutPage = () => {
                 </p>
                 <div className="mt-4">
                     <Link
-                        to="/users/asashaira"
+                        to="/users/asashakira"
                         className="text-blue-400 hover:underline ml-1"
                     >
                         こんな感じ
