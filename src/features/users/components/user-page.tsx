@@ -47,6 +47,9 @@ export const UserPage = ({userID}: {userID: string}) => {
 
     if (!user) return <UserNotFound />
 
+    const recentScores =
+        scoresQuery.data?.pages.flatMap(page => page.data.scores || []) || []
+
     // Update Button
     const lastScrapedAt = new Date(user.lastScrapedAt).getTime()
     const now = new Date().getTime()
@@ -136,17 +139,7 @@ export const UserPage = ({userID}: {userID: string}) => {
                 </div>
             </div>
 
-            {/* Recent Scores */}
-            <div className="mb-2">
-                <span className="text-white underline decoration-lime-400 font-semibold">
-                    Recent
-                </span>
-            </div>
-            {scoresQuery.data?.pages.map(page =>
-                page.data.scores?.map((score: Score) => (
-                    <ScoreCard key={score.id} score={score} />
-                )),
-            )}
+            <RecentScores scores={recentScores} />
 
             {/* show more button */}
             {scoresQuery.hasNextPage && !scoresQuery.isFetching && (
@@ -163,6 +156,37 @@ export const UserPage = ({userID}: {userID: string}) => {
                 </div>
             )}
         </div>
+    )
+}
+
+const RecentScores = ({scores}: {scores: Score[]}) => {
+    return (
+        <>
+            <div className="mb-2">
+                <span className="text-white underline decoration-lime-400 font-semibold">
+                    Recent
+                </span>
+            </div>
+
+            {scores.map((score: Score, index) => {
+                const prevScore = scores[index - 1]
+                const prevDate = prevScore
+                    ? new Date(prevScore.playedAt).toDateString()
+                    : null
+                const currentDate = new Date(score.playedAt).toDateString()
+                const showDate = currentDate !== prevDate
+                return (
+                    <div key={score.id}>
+                        {showDate && (
+                            <div className="my-4 text-sm text-gray-400">
+                                {currentDate}
+                            </div>
+                        )}
+                        <ScoreCard score={score} />
+                    </div>
+                )
+            })}
+        </>
     )
 }
 
