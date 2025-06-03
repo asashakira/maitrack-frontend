@@ -205,7 +205,7 @@ const ScoreCard = ({score}: {score: Score}) => {
                 <div>
                     <div className="text-sm whitespace-nowrap truncate">
                         <Link
-                            to={`/songs/${score.id}?v=${score.type}&d=${score.difficulty}`}
+                            to={`/songs/${score.songID}?v=${score.type}&d=${score.difficulty}`}
                             className="hover:underline"
                         >
                             {score.title}

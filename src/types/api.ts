@@ -78,7 +78,10 @@ export type ScoresResponse = {
 }
 
 export type Score = Entity<{
-    userID: string
+    id: string
+    beatmapID: string
+    songID: string
+    userUuid: string
     accuracy: string
     maxCombo: number
     dxScore: number
@@ -110,5 +113,13 @@ export type Score = Entity<{
     fast: number
     late: number
     playedAt: string
-}> &
-    Beatmap
+    title: string
+    artist: string
+    genre: string
+    imageUrl: string
+    version: string
+    difficulty: string
+    level: string
+    internalLevel: number
+    type: string
+}>
